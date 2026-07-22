@@ -44,31 +44,23 @@ const SAJT_URL = 'https://smoothies.bjarby.com';
 /**
  * Sökvägsprefixet sajten ligger under, utan avslutande snedstreck.
  *
- * Räknas ut ur SCRIPT_NAME i stället för att hårdkodas, så att exakt samma kod
- * fungerar överallt: lokalt med php -S i roten → '', på underdomänen
- * smoothies.bjarby.com → '' (mappen httpd.www/smoothies är dess webbrot), och
- * i en undermapp som syns i adressen, bjarby.com/smoothies → '/smoothies'.
+ * Tom sträng: sajten bor i webbroten på smoothies.bjarby.com, och .htaccess
+ * skickar allt annat dit. Lokalt med «php -S localhost:8199 -t site» gäller
+ * samma sak.
  *
- * Alla interna länkar går genom bas() i functions.php.
+ * Detta räknades tidigare ut ur SCRIPT_NAME. Det gick inte: mappen är fysiskt
+ * httpd.www/smoothies, och SCRIPT_NAME blir «/om.php» för en direkt filträff
+ * men «/smoothies/om.php» för en omskriven adress — på samma värd. Sidor som
+ * nåddes via en snygg URL letade därför efter sin CSS under /smoothies/ och
+ * hittade den inte. DOCUMENT_ROOT går inte heller att använda: den är identisk
+ * (/httpd.www) för både underdomänen och undermappen.
+ *
+ * Flyttas sajten någon gång tillbaka till en synlig undermapp sätts konstanten
+ * till den sökvägen för hand, t.ex. '/smoothies'. Alla interna länkar går
+ * genom bas() och tillgang_url() i functions.php och följer med.
  */
 if (!defined('BASVAG')) {
-    $skript = $_SERVER['SCRIPT_NAME'] ?? '';
-    $skriptmapp = is_string($skript)
-        ? rtrim(str_replace('\\', '/', dirname($skript)), '/')
-        : '';
-
-    // SCRIPT_NAME kommer från webbservern och tas inte på förtroende: bara en
-    // rak sökväg av vanliga tecken duger. Ser den ut på något annat sätt blir
-    // basen tom, och sajten länkar till roten i stället för någon annanstans.
-    if ($skriptmapp === '.'
-        || str_contains($skriptmapp, '..')
-        || preg_match('#^(?:/[A-Za-z0-9._-]+)*$#', $skriptmapp) !== 1
-    ) {
-        $skriptmapp = '';
-    }
-
-    define('BASVAG', $skriptmapp);
-    unset($skript, $skriptmapp);
+    define('BASVAG', '');
 }
 
 /** Datamappen på disk. Här ligger smoothies.json och onskemal.json. */

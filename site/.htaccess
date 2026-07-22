@@ -52,6 +52,19 @@ ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # --- En adress, inte två ---------------------------------------------------
+  # Mappen är fysiskt httpd.www/smoothies och nås därför både som
+  # smoothies.bjarby.com/ och bjarby.com/smoothies/. Två adresser till samma
+  # sida är inte bara oskönt för sökmotorerna — det gjorde sajten trasig:
+  # SCRIPT_NAME skiljer sig mellan en direkt filträff och en omskriven adress,
+  # så /om fick basvägen /smoothies på underdomänen och letade efter sin CSS på
+  # en adress som inte finns. Allt utom underdomänen skickas därför vidare hit.
+  #
+  # I en katalog-.htaccess matchas mönstret utan mappens eget prefix, så $1 är
+  # redan «onska» och inte «smoothies/onska».
+  RewriteCond %{HTTP_HOST} !^smoothies\.bjarby\.com$ [NC]
+  RewriteRule ^(.*)$ https://smoothies.bjarby.com/$1 [R=301,L,QSA]
+
   # data/ och inc/ är sajtens skafferi, inte dess skyltfönster.
   RewriteRule ^(?:data|inc)(?:/|$) - [F,L]
 
