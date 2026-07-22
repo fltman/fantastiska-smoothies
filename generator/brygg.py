@@ -388,7 +388,10 @@ def brev_klar(fornamn: str | None, smoothie: dict) -> str:
     halsning = f"Hej {fornamn}," if fornamn else "Hej,"
     return (
         f"{halsning}\n\n"
-        f"Din smoothie är mixad. Den heter {smoothie['namn']} — "
+        # Underrubriken inleds alltid med versal i datan. Rakt inklistrad efter
+        # ett tankstreck ger den en stor bokstav mitt i en mening, så den får
+        # bli en egen mening i stället.
+        f"Din smoothie är mixad. Den heter {smoothie['namn']}.\n"
         f"{smoothie['underrubrik'].rstrip('.')}.\n\n"
         f"Här står den, med recept och allt:\n"
         f"{lank_till(smoothie)}\n\n"

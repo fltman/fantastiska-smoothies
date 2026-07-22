@@ -49,7 +49,7 @@ $sidfot_antalstext = match (true) {
   <div class="bredd">
     <p><?= h(SAJT_BESKRIVNING) ?></p>
 
-    <p>Sitter du på en smak du längtar efter? <a href="<?= h(bas('/onska')) ?>">Önska en egen
+    <p>Längtar du efter en särskild smak? <a href="<?= h(bas('/onska')) ?>">Önska en egen
     smoothie</a> — eller skriv några rader rakt till
     <a href="mailto:<?= h(ONSKE_EPOST) ?>"><?= h(ONSKE_EPOST) ?></a>, så står ditt glas
     här med eget namn, eget recept och egen bild.</p>

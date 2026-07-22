@@ -62,7 +62,9 @@ ErrorDocument 404 /404.php
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  RewriteRule ^smoothie/([a-z0-9-]+)/?$  smoothie.php?id=$1  [L,QSA]
+  # Utan QSA: en smoothiesida tar inga andra parametrar, och QSA hade
+  # låtit /smoothie/x?id=y skicka med ett andra id till PHP.
+  RewriteRule ^smoothie/([a-z0-9-]+)/?$  smoothie.php?id=$1  [L]
   RewriteRule ^onska/?$                  onska.php           [L,QSA]
   RewriteRule ^om/?$                     om.php              [L,QSA]
 
@@ -137,6 +139,9 @@ ErrorDocument 404 /404.php
 
   # ETag-brus bort — Last-Modified räcker gott.
   Header unset ETag
+
+  # PHP-versionen behöver inte annonseras för den som letar efter en känd lucka.
+  Header always unset X-Powered-By
 
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

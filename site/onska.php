@@ -66,7 +66,7 @@ require __DIR__ . '/inc/header.php';
     ett recept att göra hemma i köket och en bild som bara är din.</li>
 
     <li>Du får ett svar i mailen med länken dit. Sedan ligger glaset kvar här, överst,
-    tills nästa ställer sig framför.</li>
+    tills nästa glas ställer sig framför det.</li>
   </ol>
 
   <a class="knapp knapp--stor onska__mailknapp" href="<?= h($mailto) ?>">Skriv till <?= h(ONSKE_EPOST) ?></a>
@@ -84,7 +84,7 @@ require __DIR__ . '/inc/header.php';
 
   <p>Adressen du skriver från används bara för att svara dig. Den publiceras aldrig, syns
   aldrig för någon annan och används aldrig till utskick. Skriver du under med ditt
-  förnamn står det under smoothien, annars står den utan namn.</p>
+  förnamn, står det under smoothien — annars står den utan namn.</p>
 </section>
 
 <?php require __DIR__ . '/inc/footer.php'; ?>

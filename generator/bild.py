@@ -22,6 +22,7 @@ from __future__ import annotations
 import logging
 import os
 import shutil
+import re
 import subprocess
 import sys
 import tempfile
@@ -326,12 +327,21 @@ def generera_bild(smoothie: dict, ut_mapp, tvinga: bool = False) -> Path:
     if not bildprompt:
         raise BildFel(f"Smoothien {smoothie_id} saknar bildprompt.")
 
+    # Id:t härstammar ur modellens svar och blir här ett filnamn. En modell som
+    # påverkats av ett illvilligt önskemål kan föreslå «../../inc/config» eller
+    # något med snedstreck i. Vi kräver kebab-case och kontrollerar dessutom att
+    # den färdiga sökvägen faktiskt hamnar i bildmappen.
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", smoothie_id):
+        raise BildFel(f"Id:t «{smoothie_id}» är inte kebab-case — vägrar skriva en fil med det namnet.")
+
     mapp = Path(ut_mapp).expanduser().resolve()
     mapp.mkdir(parents=True, exist_ok=True)
-    webp = mapp / f"{smoothie_id}.webp"
+    webp = (mapp / f"{smoothie_id}.webp").resolve()
+    if webp.parent != mapp:
+        raise BildFel(f"Bildsökvägen för «{smoothie_id}» hamnar utanför bildmappen.")
 
     # Bilden finns redan. Att göra om den kostar pengar och skriver över något
-    # som redan står på sajten — vi lämnar den ifred.
+    # som redan står på sajten — vi lämnar den i fred.
     if webp.is_file() and webp.stat().st_size > 0 and not tvinga:
         logg.info("Bilden %s finns redan — genererar inte om den.", webp.name)
         return webp

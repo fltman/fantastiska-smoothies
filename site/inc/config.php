@@ -31,12 +31,15 @@ const ONSKE_EPOST = 'smoothies@bjarby.com';
  * Sajtens adress, utan avslutande snedstreck. Används i absoluta länkar —
  * kanonisk adress, og:url och og:image.
  *
- * Underdomänen är den deploy resten av projektet är riggat för (DEPLOY.md 1.1).
- * Tre ställen måste bära samma adress: den här raden, ErrorDocument i
- * site/.htaccess och SAJT_URL i generator/.env — annars länkar sajten och
- * svarsmailet åt olika håll.
+ * Sajten ligger i undermappen /smoothies (DEPLOY.md 1.1). Tre ställen måste
+ * bära samma adress: den här raden, ErrorDocument i site/.htaccess och
+ * SAJT_URL i generator/.env — annars länkar sajten och svarsmailet åt olika
+ * håll, och canonical pekar på en adress som inte finns.
+ *
+ * Flyttas sajten till en egen underdomän ändras raden till
+ * 'https://smoothies.bjarby.com', och RewriteBase i .htaccess till '/'.
  */
-const SAJT_URL = 'https://smoothies.bjarby.com';
+const SAJT_URL = 'https://bjarby.com/smoothies';
 
 /**
  * Sökvägsprefixet sajten ligger under, utan avslutande snedstreck.

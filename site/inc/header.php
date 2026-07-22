@@ -132,7 +132,9 @@ $huvud_favikon = 'data:image/svg+xml,' . rawurlencode($huvud_favikon_svg);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= h($huvud_titel) ?></title>
 <meta name="description" content="<?= h($huvud_beskrivning) ?>">
+<?php if (!$huvud_ar_fel): ?>
 <link rel="canonical" href="<?= h($huvud_kanonisk) ?>">
+<?php endif; ?>
 <?php if ($huvud_ar_fel): ?>
 <meta name="robots" content="noindex, follow">
 <?php endif; ?>

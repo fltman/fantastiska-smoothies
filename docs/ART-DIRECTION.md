@@ -1098,7 +1098,18 @@ Klassnamnen nedan är exakt CONTRACT §5. Elementvalen är del av specen: rätt 
 13. `@media print`
 14. `@media (prefers-reduced-motion: reduce)` — **absolut sist**
 
-Riktmärke: under 16 kB oförkortad. Blir den större har någon lagt till ett femte grepp.
+Riktmärke: **under 32 kB räknat utan kommentarer och blankrader.** Filen är
+kommenterad i sektioner på svenska med flit — kommentarerna är dokumentationen
+och ska inte räknas mot taket. Blir koden större än så har någon lagt till ett
+femte grepp, och då ska något annat bort först.
+
+Mät med:
+
+```bash
+python3 -c "import re,pathlib; t=pathlib.Path('site/assets/css/style.css').read_text(); \
+u=re.sub(r'/\*.*?\*/','',t,flags=re.S); \
+print(len('\n'.join(r for r in u.splitlines() if r.strip()).encode())/1024)"
+```
 
 ### 11.1 Utskrift
 

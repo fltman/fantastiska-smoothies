@@ -108,7 +108,7 @@ def _skriv_json(sokvag: Path, data: dict) -> None:
             f.flush()
             os.fsync(f.fileno())
         os.replace(tillfallig, sokvag)
-        # Fsynca även katalogen så att själva namnbytet överlever en strömavbrott.
+        # Fsynca även katalogen så att själva namnbytet överlever ett strömavbrott.
         katalog = os.open(sokvag.parent, os.O_RDONLY)
         try:
             os.fsync(katalog)
@@ -354,6 +354,19 @@ def lagg_till(smoothie: dict) -> None:
     if fel:
         raise ValueError("Smoothien följer inte datamodellen: " + "; ".join(fel))
 
+    # Sista grinden före den publika filen. Docstringen har alltid sagt att §2
+    # granskas av recept.granska innan lagg_till anropas — men det var en
+    # förhoppning om anroparen, inte en invariant. Den kostar ett anrop per
+    # publicering och gör påståendet sant.
+    try:
+        from . import recept
+    except ImportError:
+        recept = None
+    if recept is not None:
+        brott = recept.granska(s)
+        if brott:
+            raise ValueError("Smoothien bryter mot den hårda regeln: " + "; ".join(brott))
+
     data["smoothies"].insert(0, s)   # nyast först
     data["version"] = SCHEMAVERSION
     data["uppdaterad"] = _nu()
@@ -522,13 +535,13 @@ def _ladda_upp_tar(konfig: dict, filer: list[tuple[Path, str]]) -> tuple[int, in
     """
     fjarrmapp = konfig["mapp"]
     # Bara enkla citattecken behöver skyddas; sökvägen kommer ur vår egen .env.
-    sakker_mapp = fjarrmapp.replace("'", "'\\''")
+    saker_mapp = fjarrmapp.replace("'", "'\\''")
 
     tar_in = ["tar", "czf", "-", "-C", str(SITE)]
     tar_in += [relativ for _, relativ in filer]
 
     fjarrkommando = (
-        f"mkdir -p '{sakker_mapp}' && cd '{sakker_mapp}' && tar xzf - && "
+        f"mkdir -p '{saker_mapp}' && cd '{saker_mapp}' && tar xzf - && "
         f"find . -type f | wc -l"
     )
     ssh = ["ssh", *_ssh_flaggor()]

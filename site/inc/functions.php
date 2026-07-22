@@ -236,6 +236,14 @@ function bild_url(array $s): string
     if ($id === '' || preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $id) !== 1) {
         return '';
     }
+    // Finns inte filen är det bättre att inget kort försöker rita den: index.php,
+    // smoothie.php och smoothie-kort.php kollar redan på tom sträng och hoppar
+    // över bilden. Annars får besökaren en trasig ikon när en bildgenerering
+    // misslyckats men smoothien ändå publicerats.
+    if (!is_file(BILD_MAPP . '/' . $id . '.webp')) {
+        return '';
+    }
+
     return BASVAG . '/assets/bilder/' . rawurlencode($id) . '.webp';
 }
 

@@ -7,6 +7,10 @@ generator/.env
 vault/
 
 # Genererat
+# Önskemålsloggen innehåller förnamn på riktiga människor och saltade hash av
+# deras adresser. Den ska upp på servern men aldrig in i ett publikt repo —
+# väl i git-historiken går den inte att ta tillbaka.
+site/data/onskemal.json
 generator/__pycache__/
 generator/.cache/
 generator/logg/

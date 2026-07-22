@@ -121,6 +121,11 @@ FORBJUDNA_MONSTER: tuple[tuple[str, str], ...] = (
     (r"\bblodsocker\w*", "blodsocker"),
     (r"\bmatig\w*", "matig"),
     (r"\bmättande\w*|\bmättnad\w*|\bmättar\b", "mättande"),
+    # §2 sista punktsatsen: portionsstorlek beskrivs aldrig som stor i
+    # betydelsen mycket. «Generös» och «rejäl smak» är däremot fina.
+    (r"\bstor(t|a)? (portion\w*|glas|mängd\w*|dos\w*)\b", "stor portion"),
+    (r"\brejäl(t|a)? (portion\w*|glas|mängd\w*)\b", "rejäl portion"),
+    (r"\bmatsäck\w*|\bhel måltid\b|\bersätter (ett |en )?mål\w*", "måltidsersättning"),
 )
 
 # Engelska: gäller bildpromptens egna meningar (stilsuffixet undantas, det
@@ -137,6 +142,13 @@ FORBJUDNA_MONSTER_BILD: tuple[tuple[str, str], ...] = (
     (r"\bsuperfood\w*|\bdetox\w*|\bboost\w*", "superfood"),
     (r"\bweight[\s-]?(loss|gain)\b", "weight"),
     (r"\bsupplement\w*|\bmacros?\b", "supplement"),
+)
+
+# Emojier som pekar mot kropp, träning, mätning eller vård. Sajten säger inget
+# om något av det, och det gäller ikoner lika mycket som ord (CONTRACT §2).
+FORBJUDNA_EMOJI = (
+    "💪", "⚖️", "⚖", "🏋", "🏃", "🚴", "🧘", "🩺", "💊", "🩹", "🌡", "📏", "📐",
+    "📊", "📈", "📉", "🔥", "⏱", "🥇", "🏆", "🎯", "✅", "☑", "🦵", "🫀", "🧬",
 )
 
 _KOMPILERADE = tuple((re.compile(m, re.IGNORECASE), namn) for m, namn in FORBJUDNA_MONSTER)
@@ -233,15 +245,22 @@ olivolja, kokosolja, äggula, choklad, mandelmassa. Banan räknas inte som en av
 de två — den får gärna vara med ändå. Det ska smaka mycket och kännas
 sammetslent. Kommentera aldrig varför.
 
+Liknelser ska föra tanken till något gott: en plats, ett väder, en årstid, ett
+minne. Jämför aldrig doften eller smaken med en apparat, en förpackning, en
+frysbox eller ett kylskåp — då landar meningen i kyla i stället för i bär.
+
 ## Fälten
 
 - id: kebab-case, ren ASCII (å och ä blir a, ö blir o), unikt, härlett ur namnet.
 - namn: poetiskt, 1–4 ord, inga siffror. Till exempel "Solnedgång i mango".
+  Ett ord ur namnet får återkomma högst en gång i beskrivningen, och inte alls
+  i toppningen — annars låter sidan som en tic i stället för en text.
 - underrubrik: en rad, högst 70 tecken, om smakerna. Inga siffror.
 - beskrivning: 2–3 meningar, sinnligt. Gärna ett minne eller en plats. Inga siffror.
 - smakprofil: 2–4 ord, gemener, till exempel ["tropisk", "krämig", "syrlig"].
 - farger: {"start": "#RRGGBB", "slut": "#RRGGBB"} — mättade, glada, tydligt olika.
-- emoji: exakt en emoji.
+- emoji: exakt en emoji, och den ska föreställa frukt, bär, dryck, krydda,
+  blomma eller natur. Aldrig kropp, träning, mätning, vård, mål eller bock.
 - ingredienser: 5–9 stycken, i den ordning de går i mixern. Fältet mangd är en
   hushållsmängd ("1 dl", "2 msk", "1 stor"), vara är varan i gemener, not är en
   kort variant ("eller kokosgrädde") eller tom sträng om ingen behövs.
@@ -580,6 +599,12 @@ def granska(smoothie: dict) -> list[str]:
     emoji = smoothie["emoji"]
     if len(emoji) > 4 or emoji.isascii():
         fel.append(f"emoji ska vara exakt en emoji: {emoji!r}")
+    # ART-DIRECTION §12: aldrig en ikon som föreställer en våg, en puls, ett
+    # mål eller en bock i en ruta. En emoji säger samma sak som ett ord, och
+    # 💪 eller ⚖️ hade brutit mot §2 lika tydligt som «kaloririk».
+    elif any(tecken in emoji for tecken in FORBJUDNA_EMOJI):
+        fel.append(f"emoji {emoji!r} handlar om kropp, träning eller vård — "
+                   "välj frukt, bär, dryck, krydda eller natur.")
 
     # --- feta och söta varor (designmålet) --------------------------------
     # Räknas per ingrediensrad, aldrig per nyckelord. Flera poster i
@@ -824,9 +849,12 @@ def _komplettera(
     namn = str(smoothie.get("namn", "")).strip()
     smoothie["namn"] = namn
 
-    id_forslag = str(smoothie.get("id", "")).strip().lower()
+    # Id:t sluggas alltid ur det slutliga namnet. Modellens eget förslag har
+    # visat sig glida ifrån namnet — «Johans tysta lagun» fick id:t
+    # «lagunens-tysta-timme», så adressraden sa något annat än sidan.
+    id_forslag = _slugga(namn) if namn else str(smoothie.get("id", "")).strip().lower()
     if not _ID_MONSTER.match(id_forslag) or not id_forslag.isascii():
-        id_forslag = _slugga(namn or id_forslag)
+        id_forslag = _slugga(namn or str(smoothie.get("id", "")))
     smoothie["id"] = _unikt_id(id_forslag, befintliga)
 
     # not: tom sträng ur schemat betyder "ingen not".

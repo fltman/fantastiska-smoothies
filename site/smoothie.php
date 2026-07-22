@@ -102,6 +102,13 @@ require __DIR__ . '/inc/header.php';
       <div class="onskeruta">
         <p><?= h($onskad_av) ?> skrev till brevlådan och bad om ett eget glas. Det här blev det.</p>
       </div>
+<?php elseif ($onskemal !== ''): ?>
+      <?php /* Citat utan namn: gästen skrev inte under. Orden får stå ändå —
+               de är hela anledningen till att glaset finns. */ ?>
+      <figure class="onskeruta">
+        <blockquote class="onskeruta__citat"><?= h($onskemal) ?></blockquote>
+        <figcaption><p>— ur ett mail till brevlådan</p></figcaption>
+      </figure>
 <?php endif; ?>
     </div>
   </div>

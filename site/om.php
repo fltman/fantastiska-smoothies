@@ -45,7 +45,7 @@ require __DIR__ . '/inc/header.php';
   med drycken.</p>
 
   <p>I övrigt sköter sajten sig själv. Brevlådan läses varje timme, och har ingen önskat
-  något på ett dygn brygger huset en egen.</p>
+  något på ett dygn, brygger huset en egen.</p>
 
   <p><a class="knapp" href="<?= h(bas('/onska')) ?>">Önska en egen smoothie</a></p>
 </section>

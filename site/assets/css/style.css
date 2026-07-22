@@ -142,7 +142,6 @@ html { scroll-padding-block-start: 5.5rem; }
   /* --- 2.5 Radier (ART-DIRECTION §3.2) ---------------------------------
      Generösa och mjuka. Regel: ju större yta, desto större radie. En
      bildruta får aldrig mindre radie än kortet den ligger i.              */
-  --radie-0:    0.5rem;     /* etiketter, små ytor            */
   --radie-1:    0.875rem;   /* fält, små knappar, fokusring   */
   --radie-2:    1.25rem;    /* knappar, önskeruta             */
   --radie-3:    1.75rem;    /* kort, receptkolumner           */
@@ -441,7 +440,7 @@ p.etikett { margin-block: 0 var(--rum-1); }
   border-color: var(--ram-stark);
   box-shadow: none;
 }
-.knapp--tyst:hover { background: var(--yta); box-shadow: var(--lyft-1); }
+.knapp--tyst:hover { background: var(--yta-hog); box-shadow: var(--lyft-1); }
 
 
 /* ============================================================================
@@ -646,7 +645,6 @@ p.etikett { margin-block: 0 var(--rum-1); }
   aspect-ratio: 1;
   border-radius: 46% 54% 38% 62% / 58% 42% 60% 40%;
   background: radial-gradient(circle at 35% 35%, var(--start), var(--slut) 72%);
-  will-change: transform;
   animation: driva var(--tid, 64s) var(--mjukt-fram-tillbaka) infinite alternate;
 }
 .blobb:nth-child(1) { inset-block-start: -14%; inset-inline-start: -8%; --tid: 58s; }
@@ -701,7 +699,38 @@ p.etikett { margin-block: 0 var(--rum-1); }
    undan allt annat. Ett polaroidkort på svaj: namnet ligger på --yta, aldrig
    ovanpå den mättade bilden.                                              */
 
-.hero__glas { display: none; }
+/* På mobil står glaset under knappen: mindre, tiltat och avsiktligt lite
+   utanför spalten, så att det första man ser är en smoothie och inte en
+   rubrik. Från 64rem flyttar det upp bredvid rubriken i stället. */
+.hero__glas {
+  display: block;
+  position: relative;
+  inline-size: min(72%, 15rem);
+  margin-block-start: var(--rum-2);
+  border-radius: var(--radie-3);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--lyft-2);
+  rotate: -2deg;
+}
+.hero__glas img {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.hero__glas-namn {
+  display: block;
+  padding: var(--rum-2) var(--rum-3);
+  background: var(--yta);
+  color: var(--blck);
+  font-family: var(--typ-rubrik);
+  font-weight: 600;
+  font-size: var(--steg-0);
+  letter-spacing: -0.015em;
+  border-block-start: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--start), var(--slut)) 1;
+}
 .hero__glas-namn { display: block; }
 
 @media (min-width: 64rem) {
@@ -1263,7 +1292,7 @@ a.smak-etikett:hover {
               box-shadow var(--rorelse-snabb) var(--lugn);
 }
 .granne a:last-child { text-align: end; }
-.granne a:hover { border-color: var(--ram-stark); box-shadow: var(--lyft-1); }
+.granne a:hover { background: var(--yta-hog); border-color: var(--ram-stark); box-shadow: var(--lyft-1); }
 .granne .etikett { font-family: var(--typ-brod); }
 
 
@@ -1369,7 +1398,7 @@ a.smak-etikett:hover {
   outline: 3px solid var(--blck);
   outline-offset: 3px;
   border-radius: var(--radie-1);
-  box-shadow: 0 0 0 6px var(--papper);
+  box-shadow: 0 0 0 6px var(--yta);
   transition: outline-offset var(--rorelse-snabb) var(--lugn);
 }
 :focus:not(:focus-visible) { outline: none; }
