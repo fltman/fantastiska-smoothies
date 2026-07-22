@@ -814,31 +814,25 @@ def _namn_ur_signatur(text: str) -> str | None:
     return None
 
 
-def _namn_ur_avsandare(avsandare: str) -> str | None:
-    """Tar förnamnet ur visningsnamnet: 'Elsa Andersson <e@x.se>' -> 'Elsa'.
-
-    Adressens lokaldel används aldrig — den gissar för ofta fel, och den är
-    dessutom det enda vi lovat att aldrig publicera.
-    """
-    visningsnamn = parseaddr(avsandare or "")[0].strip().strip('"')
-    if not visningsnamn or "@" in visningsnamn:
-        return None
-    # "Andersson, Elsa" -> "Elsa"
-    if "," in visningsnamn:
-        efter_komma = visningsnamn.split(",", 1)[1].strip()
-        namn = _duger_som_namn(efter_komma)
-        if namn:
-            return namn
-    return _duger_som_namn(visningsnamn)
-
-
 def fornamn_ur(text: str, avsandare: str) -> str | None:
-    """Förnamnet på den som skrev, om det går att läsa ut säkert. Annars None.
+    """Förnamnet på den som skrev, om hen själv har skrivit det. Annars None.
 
-    Bara förnamn, aldrig efternamn, och hellre None än en gissning — namnet
-    hamnar i smoothiens namn på en publik sajt.
+    **Bara signaturen räknas.** Avsändarens visningsnamn används medvetet inte,
+    trots att det oftast innehåller ett riktigt namn.
+
+    Skälet är ett löfte. Önskesidan säger «Skriv under med ditt förnamn om du
+    vill att det ska stå vem som önskade» — alltså är det ett aktivt val. De
+    flesta mailar från ett konto med sitt namn i avsändarfältet utan att tänka
+    på det, och att publicera det namnet på en öppen sajt vore att bryta det
+    löftet för den som medvetet lät bli att skriva under.
+
+    Hellre None än en gissning: namnet hamnar i smoothiens namn, i rubriken och
+    i adressraden, och går inte att ta tillbaka när det väl står där.
+
+    `avsandare` står kvar i signaturen med flit — den anropas på flera ställen,
+    och parametern gör det tydligt att adressen är känd men avsiktligt oanvänd.
     """
-    return _namn_ur_signatur(text) or _namn_ur_avsandare(avsandare)
+    return _namn_ur_signatur(text)
 
 
 # ==========================================================================
@@ -940,6 +934,8 @@ if __name__ == "__main__":
         ("Något med mango.\nMvh\nElsa", "elsa@exempel.se"),
         ("Något med mango.\nVänliga hälsningar Åsa", "a@exempel.se"),
         ("Jag heter Åsa och vill ha något med hjortron.", "a@exempel.se"),
+        # Visningsnamnet används inte längre — skrev hen inte under blir det
+        # inget namn, hur tydligt avsändarfältet än talar om vem det är.
         ("Något med mango.", "Elsa Andersson <elsa@exempel.se>"),
         ("Något med mango.", "\"Andersson, Björn\" <b@exempel.se>"),
         ("Något med mango.", "elsa.andersson@exempel.se"),
