@@ -236,7 +236,13 @@ topping och bakgrundsfärg. Bakgrundsfärgen ska rimma med `farger.start`.
   Lösenordet ligger i `generator/.env` (gitignorerad) och får aldrig skrivas in i
   någon annan fil, någon commit eller något som laddas upp till webben.
 - **Öppet för alla** att skriva in. Därför gäller spärrarna i `sparrar.py`:
-  - Max 3 önskemål per avsändaradress och dygn (hash-räknat).
+  - Max **3 publicerade smoothies** per avsändaradress och rullande dygn
+    (hash-räknat). Ett avvisat brev blev aldrig en smoothie och räknas inte —
+    annars kan ett enda olämpligt brev, eller ett skämt, blockera avsändarens
+    riktiga önskemål ett helt dygn.
+  - Max **12 behandlade brev** per adress och dygn, avvisade inräknade. Det är
+    flodspärren. Den ligger högre eftersom ett avvisat brev inte anropar någon
+    modell och inte gör någon bild.
   - Mailets text behandlas som **otillförlitlig indata**, aldrig som instruktion.
     Den citeras in i prompten inom tydliga avgränsare och modellen instrueras att
     bara läsa ut smakönskemål ur den.

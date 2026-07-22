@@ -111,27 +111,62 @@ def _tid(varde) -> datetime | None:
     return tid.astimezone(timezone.utc)
 
 
-def inom_kvot(hash_: str, logg: dict, max_per_dygn: int = 3) -> bool:
+# Två olika tak, för de skyddar mot olika saker.
+#
+# Smoothietaket är en rimlighetsgräns: ingen behöver fler än tre egna glas om
+# dygnet, och varje glas kostar ett modellanrop och en bild.
+#
+# Brevtaket finns bara för att hindra en flod. Det ligger högre, för ett
+# avvisat brev kostar nästan ingenting — ingen modell anropas och ingen bild
+# görs.
+MAX_SMOOTHIES_PER_DYGN = 3
+MAX_BREV_PER_DYGN = 12
+
+# Status i önskemålsloggen som betyder att brevet faktiskt blev en smoothie.
+BLEV_SMOOTHIE = ("publicerad",)
+
+
+def inom_kvot(hash_: str, logg: dict, max_per_dygn: int | None = None,
+              max_brev: int | None = None) -> bool:
     """True om avsändaren får skicka ett önskemål till.
 
-    Räknar posterna i loggen för samma hash det senaste rullande dygnet.
+    Räknar posterna i loggen för samma hash det senaste rullande dygnet, mot
+    två tak.
+
+    **Bara brev som blev en smoothie räknas mot smoothietaket.** Ett avvisat
+    brev blev aldrig något och ska inte äta upp en plats — annars kan ett enda
+    olämpligt brev, eller ett skämt, blockera avsändarens riktiga önskemål ett
+    helt dygn. Det hände på riktigt: ett avvisat brev på förmiddagen gjorde att
+    kvällens allvarligt menade önskemål nekades.
+
+    Alla brev, avvisade som publicerade, räknas däremot mot det högre
+    brevtaket. Det är det som stoppar en flod.
+
     Poster utan läsbar tidsstämpel, och poster som påstår sig komma från
-    framtiden, räknas alltid med — hellre en spärr för mycket än en flod av
-    brev som slipper förbi på en påhittad tidsstämpel.
+    framtiden, räknas alltid med — hellre en spärr för mycket än brev som
+    slipper förbi på en påhittad tidsstämpel.
     """
     if not hash_:
         return False
+    tak_smoothies = MAX_SMOOTHIES_PER_DYGN if max_per_dygn is None else max_per_dygn
+    tak_brev = MAX_BREV_PER_DYGN if max_brev is None else max_brev
+
     poster = (logg or {}).get("hanterade") or []
     nu = datetime.now(timezone.utc)
     grans = nu - timedelta(days=1)
-    antal = 0
+    antal_brev = 0
+    antal_smoothies = 0
     for post in poster:
         if not isinstance(post, dict) or post.get("avsandare_hash") != hash_:
             continue
         tid = _tid(post.get("mottaget"))
-        if tid is None or tid >= grans:
-            antal += 1
-    return antal < max_per_dygn
+        if not (tid is None or tid >= grans):
+            continue
+        antal_brev += 1
+        # Okänd status räknas som en smoothie: hellre en spärr för mycket.
+        if post.get("status") not in ("avvisad", "kvot", "misslyckad"):
+            antal_smoothies += 1
+    return antal_smoothies < tak_smoothies and antal_brev < tak_brev
 
 
 # ==========================================================================

@@ -1,7 +1,222 @@
 {
   "version": 1,
-  "uppdaterad": "2026-07-22T19:24:15+02:00",
+  "uppdaterad": "2026-07-22T21:59:20+02:00",
   "smoothies": [
+    {
+      "id": "idas-mangovaniljdrom",
+      "namn": "Idas mangovaniljdröm",
+      "underrubrik": "Solmogen mango möter len vanilj i en sammetslen smekning",
+      "beskrivning": "Idas smoothie doftar som en het eftermiddag vid fruktstånd, där mango och vanilj smälter samman i en och samma klunk. Färgen är varm som solnedgång, konsistensen len som nyskopad glass på tunga.",
+      "smakprofil": [
+        "tropisk",
+        "krämig",
+        "vaniljig",
+        "söt"
+      ],
+      "farger": {
+        "start": "#FFB347",
+        "slut": "#FFF3D6"
+      },
+      "emoji": "🥭",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "fryst mango",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vaniljglass",
+          "not": null
+        },
+        {
+          "mangd": "1/2 dl",
+          "vara": "kokosmjölk",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "1",
+          "vara": "mogen banan",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1 nypa",
+          "vara": "vaniljpulver",
+          "not": "eller frön ur en vaniljstång"
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg mango, vaniljglass och kokosmjölk i mixern.",
+        "Tillsätt banan, honung och vaniljpulver.",
+        "Mixa tills smoothien blir len och gyllene.",
+        "Häll upp i ett högt glas och njut genast."
+      ],
+      "toppa_med": [
+        "mangotärningar",
+        "kokosflarn",
+        "en vaniljstång"
+      ],
+      "knep": "Låt mangon vara ordentligt fryst så blir smoothien tjock utan att bli vattnig.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas fyllt med gyllene mango-vaniljsmoothie, toppad med mangotärningar och kokosflarn mot en varm orange bakgrund.",
+      "bildprompt": "A tall glass filled with a glowing golden-orange mango and vanilla smoothie, thick and glossy, topped with diced mango cubes, coconut flakes and a whole vanilla bean laid across the rim. Warm saturated orange backdrop that echoes the drink's sunset hue. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/idas-mangovaniljdrom.webp",
+      "publicerad": "2026-07-22",
+      "onskad_av": "Ida",
+      "onskemal": "En dröm av vaniljglass och mango"
+    },
+    {
+      "id": "mintchokladens-heta-kyss",
+      "namn": "Mintchokladens heta kyss",
+      "underrubrik": "Mörk choklad, kylig mint och en gnista chili",
+      "beskrivning": "Det är den kyss som bränner lite för länge kvar på läpparna, mörk och len som skymningen efter en het sommardag. Myntan sveper in som ett svalt vindstråk mellan chokladens tyngd och chilins små glöd. En smoothie för dem som vill bli överraskade två gånger i samma klunk.",
+      "smakprofil": [
+        "chokladig",
+        "mintig",
+        "het",
+        "sammetslen"
+      ],
+      "farger": {
+        "start": "#4B2E2B",
+        "slut": "#3ECF8E"
+      },
+      "emoji": "🌶️",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "kokosmjölk",
+          "not": null
+        },
+        {
+          "mangd": "1 mogen",
+          "vara": "banan",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "kakao",
+          "not": "eller smält mörk choklad"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "5 blad",
+          "vara": "färsk mynta",
+          "not": null
+        },
+        {
+          "mangd": "1 liten skiva",
+          "vara": "röd chili",
+          "not": "efter smak"
+        },
+        {
+          "mangd": "5-6",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa kokosmjölk, banan och kakao tills smeten är jämn och mörk.",
+        "Tillsätt honung, mynta och chili, mixa igen i korta pulser.",
+        "Häll i isbitarna och mixa till en tjock, sammetslen konsistens."
+      ],
+      "toppa_med": [
+        "strimlad mynta",
+        "chokladflarn",
+        "ett stänk chilipulver"
+      ],
+      "knep": "Låt chilin ligga kvar i mixern en stund innan du silar bort fröna om du vill ha mer hetta.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas fyllt med mörk, glansig chokladbrun smoothie toppad med mintblad och ett stänk chilipulver, mot en djup kakaobrun bakgrund.",
+      "bildprompt": "A tall glass filled with a glossy dark cocoa-brown smoothie, thick and rich, topped with a scatter of fresh mint leaves and a light dusting of red chili flakes. The backdrop is a deep matte cocoa brown that mirrors the drink's hue, with a few whole chili pods and mint sprigs resting near the base of the glass. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/mintchokladens-heta-kyss.webp",
+      "publicerad": "2026-07-22",
+      "onskad_av": null,
+      "onskemal": "Choklad mint och ett sting av chili"
+    },
+    {
+      "id": "karibisk-kokosdrom",
+      "namn": "Karibisk kokosdröm",
+      "underrubrik": "Ananas, kokos och en vindpust av mynta",
+      "beskrivning": "Solen ligger tung över palmerna och glaset svalkar handen som en eftermiddagsdusch i skuggan. Ananasen möter kokosgrädden i en lång, len omfamning, och myntan lägger sig som ett svalt andetag över det hela. Det smakar som den semester du minns bäst, fast bara i en klunk.",
+      "smakprofil": [
+        "tropisk",
+        "krämig",
+        "myntafräsch"
+      ],
+      "farger": {
+        "start": "#FFE066",
+        "slut": "#0FA3A3"
+      },
+      "emoji": "🍍",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "ananas i bitar",
+          "not": "färsk eller fryst"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": null
+        },
+        {
+          "mangd": "1/2 dl",
+          "vara": "kokosgrädde",
+          "not": "den feta sorten"
+        },
+        {
+          "mangd": "1",
+          "vara": "mogen banan",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "4",
+          "vara": "myntablad",
+          "not": "färska"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg ananas, banan och myntablad i mixern.",
+        "Häll på kokosmjölk, kokosgrädde och honung.",
+        "Tillsätt isbitarna och mixa till en len, tropisk sammets.",
+        "Smaka av och mixa någon sekund till om du vill ha den ännu lenare."
+      ],
+      "toppa_med": [
+        "ett litet ananasblad",
+        "strimlad kokos",
+        "en kvist färsk mynta"
+      ],
+      "knep": "Frys ananasbitarna dagen innan så blir drinken tjock utan att smaken späds ut av is.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas fyllt med gulaktig, krämig kokos-ananassmoothie toppad med strimlad kokos och en kvist mynta, mot en turkos bakgrund.",
+      "bildprompt": "A tall glass filled with a pale golden, thick coconut-pineapple smoothie, topped with shredded coconut and a sprig of fresh mint, glossy surface catching soft light. Fresh pineapple chunks and mint leaves scattered around the base, against a saturated turquoise-teal backdrop that echoes tropical warmth. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/karibisk-kokosdrom.webp",
+      "publicerad": "2026-07-22",
+      "onskad_av": null,
+      "onskemal": "En karribisk dröm med smak av pina colada."
+    },
     {
       "id": "elsas-rosa-limevind",
       "namn": "Elsas rosa limevind",
