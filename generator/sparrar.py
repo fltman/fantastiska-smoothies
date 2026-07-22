@@ -532,6 +532,23 @@ OLAMPLIGT = _ordstam(
     "spott", "alkohol", "bourbon", "punsch",
     # flerordsfraser
     "skada någon", "ta livet av", "slå ihjäl", "slår ihjäl",
+) + _ordstam(
+    # Könsord och sexuellt innehåll. Brevlådan är öppen för vem som helst och
+    # citatet, förnamnet och smoothiens namn hamnar på en publik sida — det
+    # räcker att ett enda sådant brev tar sig igenom för att sajten ska bli
+    # något annat än den är. Som ordstam: fångar böjningar och sammansättningar.
+    "snopp", "snippa", "fitta", "kuk", "kukar", "penis", "vagina", "sperma",
+    "runka", "knulla", "avsugning", "onani", "erektion", "orgasm", "porrfilm",
+    "pedofil", "incest", "våldta", "prostituer", "bordell",
+    "dickpic", "blowjob", "handjob", "cumshot", "creampie",
+) + _helord(
+    # Korta ord som skulle dra med sig oskyldiga som ordstam:
+    # balle/ballerina, röv/rövare, pitt/pitabröd, dick/Dickens,
+    # cock/cocktail, sex/siffran sex, bög/bögträd (och ordet är dessutom
+    # neutralt i sig — det är kontexten som inte hör hemma i ett recept).
+    "balle", "ballar", "röv", "röven", "arsle", "arslet", "pitt", "kön",
+    "dick", "cock", "pussy", "boobs", "tits", "cum", "fuck", "fucking",
+    "shit", "bitch", "asshole", "wank", "horunge",
 )
 
 # d) Den hårda regeln i CONTRACT §2. Handlar brevet om kroppen, vikten eller
