@@ -217,8 +217,8 @@ NAMNRAD_RE = re.compile(rf"{_VERSALORD}(?:[ \t]+{_VERSALORD})+")
 def _ar_namnord(ord_: str) -> bool:
     """Sant för ett ord som kan vara ett namn — men inte för ett smakord.
 
-    "Andersson" duger, "Mango" gör det inte: det andra ordet i "Elsas Mango"
-    är ingen namnteckning utan en frukt, och en frukt ska stå kvar i citatet.
+    "Andersson" duger, "Mango" gör det inte: andra ordet i "Elsa Mango" är
+    ingen namnteckning utan en frukt, och frukten ska stå kvar i citatet.
     """
     rensat = ord_.strip(",.;:!?\"'()[]<>")
     if len(rensat) < 2 or not NAMN_RE.fullmatch(rensat):
@@ -251,6 +251,10 @@ def _ta_bort_efternamn(text: str) -> str:
     Förnamnet måste stå kvar: det läses ut ur den här texten och blir en del
     av smoothiens namn (CONTRACT §2b). Efternamnet behövs aldrig till något
     och får aldrig publiceras — varken i citatet eller i prompten.
+
+    Ett egennamn i två led ("New York") kortas på samma sätt, till "New". Det
+    är priset för att inget efternamn ska slinka igenom, och ett kortat ortnamn
+    i ett citat är billigare än en utpekad människa.
     """
     return NAMNRAD_RE.sub(_behall_forsta_namnet, text)
 

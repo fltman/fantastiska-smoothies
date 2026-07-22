@@ -1,7 +1,80 @@
 {
   "version": 1,
-  "uppdaterad": "2026-07-22T11:02:37+02:00",
+  "uppdaterad": "2026-07-22T11:55:30+02:00",
   "smoothies": [
+    {
+      "id": "elsas-rosa-limevind",
+      "namn": "Elsas rosa limevind",
+      "underrubrik": "Hallon möter lime i en syrlig, sammetslen våg",
+      "beskrivning": "Elsas smoothie doftar av sommarens första hallon och en skvätt pressad lime, som en frisk vind över ängen. Syran möts av en sammetslen botten som gör varje klunk mjuk och rund. Färgen skiftar som en solnedgång över bärbuskarna.",
+      "smakprofil": [
+        "syrlig",
+        "fräsch",
+        "krämig",
+        "fruktig"
+      ],
+      "farger": {
+        "start": "#FF4D6D",
+        "slut": "#A8E063"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "hallon",
+          "not": "fryst eller färskt"
+        },
+        {
+          "mangd": "1",
+          "vara": "lime",
+          "not": "skal och saft"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": "eller grädde"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grekisk yoghurt",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "5 blad",
+          "vara": "mynta",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Skölj hallonen och pressa saften ur limen.",
+        "Mixa alla ingredienser tills smoothien är sammetslen och rosa.",
+        "Smaka av med extra honung om du vill ha en sötare ton."
+      ],
+      "toppa_med": [
+        "färska hallon",
+        "limezest",
+        "myntablad"
+      ],
+      "knep": "Frys hallonen kvällen innan för en kallare och tjockare konsistens.",
+      "portioner": 2,
+      "tid_minuter": 5,
+      "bild_alt": "En hög smoothieglas fyllt med rosa-grön smoothie, garnerad med hallon, limezest och myntablad mot en färgstark bakgrund.",
+      "bildprompt": "A vibrant pink-to-green smoothie in a tall clear glass, swirled with flecks of lime zest and fresh raspberries, topped with a sprig of mint. The backdrop is a bold raspberry-pink colour block that matches the drink's hue. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/elsas-rosa-limevind.webp",
+      "publicerad": "2026-07-22",
+      "onskad_av": "Elsa",
+      "onskemal": null
+    },
     {
       "id": "lakritsbla-timme",
       "namn": "Lakritsblå timme",
@@ -197,7 +270,7 @@
         {
           "mangd": "100 g",
           "vara": "mascarpone",
-          "not": "eller kvarg om du vill ha mer syra"
+          "not": "eller crème fraîche om du vill ha mer syra"
         },
         {
           "mangd": "1 dl",

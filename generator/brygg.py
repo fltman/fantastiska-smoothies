@@ -256,6 +256,10 @@ def _citat_ur(text: str) -> str | None:
             continue
         if any(regel.search(mening) for regel in FORBJUDET_I_CITAT):
             continue
+        # Sista ordet har recept-listan, så att projektet har EN vokabulär
+        # och inte tre som glider isär.
+        if not recept.citat_ar_publicerbart(mening):
+            continue
         return mening
     return None
 

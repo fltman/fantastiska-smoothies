@@ -61,7 +61,7 @@ RIKA_VAROR = (
     "grädde", "gradde", "kokosmjölk", "kokosgrädde", "kokoskräm", "avokado",
     "nötsmör", "jordnötssmör", "mandelsmör", "cashewsmör", "hasselnötskräm",
     "tahini", "mascarpone", "ricotta", "creme fraiche", "crème fraîche",
-    "turkisk yoghurt", "grekisk yoghurt", "kvarg", "philadelphia", "färskost",
+    "philadelphia", "färskost",
     "honung", "lönnsirap", "agavesirap", "dadlar", "dadel", "fikon", "russin",
     "glass", "vaniljglass", "chokladglass", "kondenserad mjölk", "havregryn",
     "havre", "olivolja", "kokosolja", "äggula", "vit choklad", "mörk choklad",
@@ -424,9 +424,33 @@ def _rakna_meningar(text: str) -> int:
 # Granskning
 # ---------------------------------------------------------------------------
 
+def citat_ar_publicerbart(text: str) -> bool:
+    """Får gästens egna ord citeras på sajten?
+
+    Detta är den enda listan i projektet — brygg._citat_ur frågar hit i
+    stället för att hålla en egen, som förr divergerade och tyst svalde
+    oskyldiga citat.
+
+    Skillnaden mot granska() är avsiktlig och viktig: granska() dömer texten
+    VI skriver, och fäller receptet. Den här dömer texten GÄSTEN skrev, och
+    fäller bara citatet. CONTRACT.md §7 säger det rakt ut — skulle avsändaren
+    själv ha skrivit något ur den förbjudna vokabulären lämnas fältet tomt
+    hellre än att det citeras. Gästen ska inte bli av med sitt glas för att
+    hen råkade skriva «något lätt och fräscht».
+    """
+    if not text:
+        return False
+    return not any(monster.search(text) for monster, _ in _KOMPILERADE)
+
+
 def _textfalt(smoothie: dict) -> Iterator[tuple[str, str]]:
-    """Ger (fältnamn, text) för all svensk text en människa kan få se."""
-    for falt in ("namn", "underrubrik", "beskrivning", "knep", "bild_alt", "onskemal"):
+    """Ger (fältnamn, text) för all svensk text VI har skrivit.
+
+    onskemal står med flit inte här. Det fältet är gästens egna ord, och de
+    granskas av citat_ar_publicerbart() innan de sätts — aldrig här, där ett
+    fynd skulle kasta hela receptet.
+    """
+    for falt in ("namn", "underrubrik", "beskrivning", "knep", "bild_alt"):
         varde = smoothie.get(falt)
         if isinstance(varde, str):
             yield falt, varde
