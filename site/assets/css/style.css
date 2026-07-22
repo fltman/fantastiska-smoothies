@@ -794,6 +794,73 @@ p.etikett { margin-block: 0 var(--rum-1); }
 }
 
 
+/* --- Paginering -------------------------------------------------------------
+   Ligger sist i galleriets rutnät och spänner över hela bredden. Länkarna är
+   piller med 44 px tryckyta, samma mått som filterpillren ovanför, så raden
+   känns som en fortsättning och inte som en ny sorts kontroll. */
+
+.paginering {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rum-2);
+  margin-block-start: var(--rum-5);
+}
+
+.paginering__lank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  padding-inline: var(--rum-3);
+  border: 2px solid var(--ram-stark);
+  border-radius: var(--radie-rund);
+  background: var(--yta);
+  color: var(--blck);
+  font-family: var(--typ-rubrik);
+  font-weight: 600;
+  font-size: var(--steg-0);
+  text-decoration: none;
+  transition: background var(--rorelse-snabb) var(--lugn),
+              border-color var(--rorelse-snabb) var(--lugn);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paginering__lank:hover {
+    background: var(--yta-hog);
+    border-color: var(--blck);
+  }
+}
+
+/* Sidan man står på är ingen länk — den är ett läge. Fylld i bläck, samma
+   grepp som det valda filterpillret. */
+.paginering__lank--nu {
+  background: var(--blck);
+  border-color: var(--blck);
+  color: var(--papper);
+  cursor: default;
+}
+
+.paginering__hopp {
+  color: var(--dis);
+  padding-inline: var(--rum-1);
+  user-select: none;
+}
+
+/* Raden under pillren: säger var man är, för den som inte räknar piller.
+   Bryter till egen rad genom att spänna hela bredden. */
+.paginering__antal {
+  inline-size: 100%;
+  margin: 0;
+  text-align: center;
+  color: var(--dis);
+  font-size: var(--steg--1);
+}
+
+
 /* ============================================================================
    9. GALLERI, KORT OCH KORTLYFTET
    Signaturgrepp 2.

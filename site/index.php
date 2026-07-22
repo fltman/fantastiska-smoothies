@@ -113,8 +113,64 @@ $filterrad = 'display:flex;flex-wrap:wrap;gap:var(--rum-1);list-style:none;'
 $piller = 'min-block-size:2.75rem;padding-inline:1rem';
 $piller_valt = $piller . ';background:var(--blck);color:var(--papper);border-color:var(--blck)';
 
-$antal_visade = count($visade);
-$antalsord = $antal_visade === 1 ? 'en smoothie' : $antal_visade . ' smoothies';
+/* ── Paginering ──────────────────────────────────────────────────────────
+   Galleriet växer med en smoothie i timmen i värsta fall, och en sida med
+   hundra kort är varken snabb att ladda eller rolig att bläddra i.
+
+   Tolv per sida: fyra hela rader i det treradiga rutnätet, sex rader på
+   surfplatta, tolv på mobil. Ingen halv rad längst ner.
+
+   Sidnumret är en vanlig länk (?sida=2 eller /sida/2). Filtret följer med, och
+   allt fungerar utan JavaScript — app.js filtrerar bara det som redan ligger
+   på den öppnade sidan. */
+const PER_SIDA = 12;
+
+$antal_totalt = count($visade);
+$antal_sidor  = max(1, (int) ceil($antal_totalt / PER_SIDA));
+
+$sida = 1;
+if (isset($_GET['sida']) && is_string($_GET['sida'])) {
+    /* Bara rena heltal. "2", inte "2abc", "+2" eller "02". */
+    $sida = preg_match('/^[1-9][0-9]{0,4}$/', $_GET['sida']) === 1
+        ? (int) $_GET['sida']
+        : 0;
+}
+
+/* En sida som inte finns är inte en tom sida — det är fel adress. Annars kan
+   vilken siffra som helst indexeras som en riktig men innehållslös sida. */
+if ($sida < 1 || ($antal_totalt > 0 && $sida > $antal_sidor)) {
+    http_response_code(404);
+    require __DIR__ . '/404.php';
+    exit;
+}
+
+$visade = array_slice($visade, ($sida - 1) * PER_SIDA, PER_SIDA);
+
+/** Länk till en viss sida, med filtret bevarat. Sida 1 får ingen sidparameter
+ *  — då finns bara en adress för galleriets förstasida. */
+$sidlank = static function (int $n) use ($vald_smak): string {
+    $fragor = [];
+    if ($vald_smak !== '') {
+        $fragor['smak'] = $vald_smak;
+    }
+    if ($n > 1) {
+        $fragor['sida'] = (string) $n;
+    }
+    return bas('/') . ($fragor !== [] ? '?' . http_build_query($fragor) : '');
+};
+
+/* Sidnummer att visa: alltid första och sista, plus grannarna till den man
+   står på. Resten blir en ellips, så raden inte spränger mobilen vid 40 sidor. */
+$sidnummer = [];
+foreach (range(1, $antal_sidor) as $n) {
+    if ($n === 1 || $n === $antal_sidor || abs($n - $sida) <= 1) {
+        $sidnummer[] = $n;
+    }
+}
+
+/* Räknas på hela urvalet, inte på den öppnade sidan: rubriken ska säga hur
+   många smoothies smaken har, inte hur många som råkar rymmas på sidan. */
+$antalsord = $antal_totalt === 1 ? 'en smoothie' : $antal_totalt . ' smoothies';
 
 /* Smakorden i datan är nästan alltid adjektiv (krämig, tvär, sammetslen), så
    de kan aldrig bära bestämd form som ett substantiv — "Smaken krämig" är inte
@@ -130,11 +186,24 @@ if ($vald_smak !== '') {
     $galleritext = 'Alla smoothies · Nyast först';
 }
 
+/* Sidnumret hör hemma i rubriken och i sidtiteln — annars ser sida 2 ut som
+   sida 1 i en flik, i en bokmärkeslista och i ett sökresultat. */
+if ($sida > 1) {
+    $galleritext .= ' · Sida ' . $sida;
+    $sidtitel = ($sidtitel ?? 'Alla smoothies') . ' · Sida ' . $sida;
+}
+
+/* Kanonisk adress för just den här sidan, annars pekar sida 2 på sida 1 och
+   försvinner ur sökresultaten. $sidlank ger '/' eller '/?smak=…&sida=…';
+   header.php lägger på domänen. */
+$sidurl = ltrim(substr($sidlank($sida), strlen(bas('/'))), '/');
+
 $aktiv_sida = 'index';
 
 require __DIR__ . '/inc/header.php';
 ?>
 
+<?php if ($sida === 1): ?>
 <section class="hero bredd"<?= $smoothies !== [] ? ' ' . gradient_stil($smoothies[0]) : '' ?>>
 <?php if ($smoothies !== []): ?>
   <div class="hero__blobbar" aria-hidden="true">
@@ -169,6 +238,7 @@ if ($smoothies !== [] && bild_url($smoothies[0]) !== ''):
   </a>
 <?php endif; ?>
 </section>
+<?php endif; ?>
 
 <section class="galleri bredd" aria-labelledby="galleri-rubrik"<?= $visade !== [] ? ' ' . gradient_stil($visade[0]) : '' ?>>
   <h2 class="galleri__rubrik" id="galleri-rubrik"><?= h($galleritext) ?></h2>
@@ -191,6 +261,33 @@ if ($smoothies !== [] && bild_url($smoothies[0]) !== ''):
 <?php foreach ($visade as $kort_index => $smoothie): ?>
 <?php include __DIR__ . '/inc/smoothie-kort.php'; ?>
 <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if ($antal_sidor > 1): ?>
+  <nav class="paginering" aria-label="Fler sidor med smoothies">
+<?php if ($sida > 1): ?>
+    <a class="paginering__lank" href="<?= h($sidlank($sida - 1)) ?>" rel="prev">Föregående</a>
+<?php endif; ?>
+
+<?php $forra_nummer = 0; ?>
+<?php foreach ($sidnummer as $n): ?>
+<?php if ($forra_nummer !== 0 && $n > $forra_nummer + 1): ?>
+    <span class="paginering__hopp" aria-hidden="true">…</span>
+<?php endif; ?>
+<?php if ($n === $sida): ?>
+    <span class="paginering__lank paginering__lank--nu" aria-current="page"><?= h((string) $n) ?></span>
+<?php else: ?>
+    <a class="paginering__lank" href="<?= h($sidlank($n)) ?>"><span class="visuellt-dold">Sida </span><?= h((string) $n) ?></a>
+<?php endif; ?>
+<?php $forra_nummer = $n; ?>
+<?php endforeach; ?>
+
+<?php if ($sida < $antal_sidor): ?>
+    <a class="paginering__lank" href="<?= h($sidlank($sida + 1)) ?>" rel="next">Nästa</a>
+<?php endif; ?>
+
+    <p class="paginering__antal">Sida <?= h((string) $sida) ?> av <?= h((string) $antal_sidor) ?> · <?= h($antalsord) ?></p>
+  </nav>
 <?php endif; ?>
 </section>
 

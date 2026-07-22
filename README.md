@@ -98,11 +98,19 @@ Husets egen finns för att sajten aldrig ska stå still, inte för att fylla den
 Takten styrs av `HUSETS_EGEN_TIMMAR` i `generator/.env`; `0` stänger av den helt
 och sajten växer då bara på inkomna önskemål.
 
+### Galleriet växer
+
+Tolv smoothies per sida. Sidnumret är en vanlig länk (`/sida/2`, eller
+`?smak=krämig&sida=2` med ett filter) som PHP läser innan sidan skrivs ut — det
+fungerar med JavaScript avstängt. Hjälten visas bara på sida 1; på sida 3 vore
+den bara en vägg att scrolla förbi. En sida som inte finns svarar 404, inte en
+tom sida, så att inte vilken siffra som helst kan indexeras.
+
 ### Filträd
 
 ```
 site/                      # det som laddas upp till servern
-  index.php                # galleriet, med filter på smakord (fungerar utan JS)
+  index.php                # galleriet: filter på smakord + paginering, båda utan JS
   smoothie.php             # en smoothie (?id=slug)
   onska.php                # önska en egen
   om.php   404.php

@@ -186,6 +186,10 @@ skriva in dem här.
 `hero__glas` (senaste smoothiens bild som länk, visas först från 64rem),
 `hero__glas-namn`
 
+**Paginering**
+`paginering`, `paginering__lank`, `paginering__lank--nu`, `paginering__hopp`
+(ellipsen mellan sidnummer), `paginering__antal`
+
 **Galleri**
 `galleri`, `galleri__rubrik`, `kort`, `kort__lank`, `kort__bild`, `kort__bildruta`,
 `kort__text`, `kort__namn`, `kort__underrubrik`, `kort__profil`, `smak-etikett`,
