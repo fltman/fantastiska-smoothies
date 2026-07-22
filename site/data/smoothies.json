@@ -1,0 +1,1001 @@
+{
+  "version": 1,
+  "uppdaterad": "2026-07-22T11:02:37+02:00",
+  "smoothies": [
+    {
+      "id": "lakritsbla-timme",
+      "namn": "Lakritsblå timme",
+      "underrubrik": "Djupa blåbär möter mörk lakrits i en sammetslen klunk",
+      "beskrivning": "Första klunken är sval och sammetslen: lakritsen lägger sig som en mörk ton under blåbärens sötma, och mascarponen rundar av alla kanter. Dadlarna gör slutet nästan sirapsmjukt medan lakritsdoften dröjer kvar över glaset. Mörkret skimrar blått mot kanten, som bläck under månsken vid ett skogsbryn där luften smakar sött och salt på en gång.",
+      "smakprofil": [
+        "lakrits",
+        "blåbär",
+        "mörk",
+        "sammetslen"
+      ],
+      "farger": {
+        "start": "#2E1A47",
+        "slut": "#14101C"
+      },
+      "emoji": "🫐",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "fryst blåbär",
+          "not": null
+        },
+        {
+          "mangd": "1",
+          "vara": "mogen banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": "eller grädde"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mascarpone",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "lakritspulver",
+          "not": "eller saltlakritspulver"
+        },
+        {
+          "mangd": "2",
+          "vara": "dadlar",
+          "not": "urkärnade"
+        },
+        {
+          "mangd": "1/2 tsk",
+          "vara": "vaniljextrakt",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg blåbär, banan och kokosmjölk i mixern.",
+        "Tillsätt mascarpone, lakritspulver, dadlar och vanilj.",
+        "Mixa till en tjock, sammetslen konsistens.",
+        "Häll upp i ett högt glas."
+      ],
+      "toppa_med": [
+        "ett strö av lakritspulver",
+        "några hela blåbär",
+        "en skiva saltlakrits"
+      ],
+      "knep": "Blötlägg lakritspulvret i en skvätt varm mjölk innan du mixar för att få fram djupet i smaken.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas fyllt med djupt blålila smoothie, toppad med lakritspulver och hela blåbär, mot en mörk lila bakgrund.",
+      "bildprompt": "A deep indigo-purple smoothie filled to the brim in a tall clear glass, its surface dusted with dark licorice powder and studded with a few whole blueberries, thick glossy texture swirling with almost-black undertones. The backdrop is a rich deep purple that matches the drink's hue. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/lakritsbla-timme.webp",
+      "publicerad": "2026-07-22",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "solkatt-pa-kaklet",
+      "namn": "Solkatt på kaklet",
+      "underrubrik": "Mango och passionsfrukt i vaniljvispad grädde",
+      "beskrivning": "Den lyser som en fyrkantig sol på ett badrumsgolv i juli. Mangon är solmogen och nästan honungsklibbig, passionsfrukten skär rakt igenom med sin syra och sina små knastrande kärnor. Doften slår upp när du lyfter locket från mixern: blomsöt, varm och med en skarp grön kant av lime.",
+      "smakprofil": [
+        "tropisk",
+        "syrlig",
+        "krämig"
+      ],
+      "farger": {
+        "start": "#FFC53D",
+        "slut": "#F4623A"
+      },
+      "emoji": "🥭",
+      "ingredienser": [
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "2 dl",
+          "vara": "frysta mangotärningar",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "3 msk",
+          "vara": "mascarpone",
+          "not": null
+        },
+        {
+          "mangd": "2 st",
+          "vara": "passionsfrukter, innehållet urskrapat",
+          "not": "spara en skvätt till toppen"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "flytande honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "1 tsk",
+          "vara": "limesaft",
+          "not": "pressad precis innan"
+        },
+        {
+          "mangd": "1 krm",
+          "vara": "vaniljpulver",
+          "not": "eller frön från en halv vaniljstång"
+        }
+      ],
+      "gor_sa_har": [
+        "Vispa grädden halvstyv i en kall skål och ställ den svalt medan du gör resten.",
+        "Kör mango, banan, mascarpone, honung, limesaft och vanilj slätt i mixern, en kort stund i taget så att allt håller sig iskallt.",
+        "Vänd ner grädden för hand med en slickepott tills ytan marmorerar sig, och rör i passionsfruktkärnorna allra sist."
+      ],
+      "toppa_med": [
+        "passionsfrukt direkt ur skalet",
+        "rostade kokosflarn",
+        "rivet limeskal"
+      ],
+      "knep": "Frys mangon utbredd i ett tunt lager på en plåt i stället för i en klump, då går den sönder jämnt i mixern och drycken blir sammetslen i stället för trådig.",
+      "portioner": 2,
+      "tid_minuter": 8,
+      "bild": "assets/bilder/solkatt-pa-kaklet.webp",
+      "bild_alt": "Ett högt glas med tjock gyllengul smoothie som går över i korallorange längst ner, toppad med passionsfruktkärnor, kokosflarn och en spiral limeskal. Vid glasets fot ligger en halv passionsfrukt, kokosbitar och limeskal, mot en varm gul bakgrund.",
+      "bildprompt": "A thick, glossy golden-yellow smoothie that deepens into warm coral toward the bottom of the glass, crowned with a spoonful of glistening passion fruit seeds, toasted coconut flakes and a curl of lime zest. Solid saturated marigold-yellow backdrop that echoes the golden top of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-22",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "skymning-over-myren",
+      "namn": "Elins skymning över myren",
+      "underrubrik": "Blåbär och björnbär med nystött kardemumma och honung",
+      "beskrivning": "Kardemumman kommer först som doft, långt före smaken, och sedan ligger bären kvar kalla på tungan. Mitten är så mörk att den knappt släpper igenom något ljus alls, men mot kanten lyser den violett, som en myr en stund innan mörkret lägger sig. Det här är Elins sena augustikväll: blöt mossa under knäna och hinken redan full.",
+      "smakprofil": [
+        "djup",
+        "blommig",
+        "sammetslen"
+      ],
+      "farger": {
+        "start": "#16235F",
+        "slut": "#8A3FA8"
+      },
+      "emoji": "🫐",
+      "ingredienser": [
+        {
+          "mangd": "3 dl",
+          "vara": "frysta blåbär",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "frysta björnbär",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 st",
+          "vara": "mjuka dadlar, urkärnade",
+          "not": null
+        },
+        {
+          "mangd": "4 st",
+          "vara": "kardemummakapslar, kärnorna stötta",
+          "not": "eller ½ tsk nymalen kardemumma"
+        },
+        {
+          "mangd": "100 g",
+          "vara": "mascarpone",
+          "not": "eller kvarg om du vill ha mer syra"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "honung",
+          "not": "gärna ljunghonung"
+        }
+      ],
+      "gor_sa_har": [
+        "Stöt kardemummakärnorna i mortel tills doften slår upp mot ansiktet.",
+        "Mixa bär, banan, dadlar och kardemumma slätt, börja långsamt så att bären släpper.",
+        "Tillsätt mascarpone, grädde och honung och kör bara några sekunder till, så behåller färgen sitt djup."
+      ],
+      "toppa_med": [
+        "några hela blåbär",
+        "en virvel vispad grädde",
+        "en nypa stött kardemumma"
+      ],
+      "knep": "Mixa blåbären med dadlarna först och släpp ner björnbären allra sist — färgen blir djupare och kärnorna hinner inte malas sönder.",
+      "portioner": 2,
+      "tid_minuter": 6,
+      "bild": "assets/bilder/skymning-over-myren.webp",
+      "bild_alt": "Ett högt glas med tjock, nästan svartblå smoothie som skimrar violett längst ner, toppad med en klick tjock grädde, blåbär och björnbär. Runt glasets fot ligger fler bär och en sked grädde, mot en djupblå bakgrund.",
+      "bildprompt": "A thick, near-black indigo blueberry and blackberry smoothie that glows deep violet where the light passes through, topped with whole glossy berries and a swirl of thick cream. Solid saturated midnight-blue backdrop that echoes the darkest indigo of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-19",
+      "onskad_av": "Elin",
+      "onskemal": "Går det att göra något som smakar sen augustikväll i skogen? Blåbär och kardemumma, om jag får önska."
+    },
+    {
+      "id": "sista-taget-hem",
+      "namn": "Sista tåget hem",
+      "underrubrik": "Jordnötssmör, rostad hasselnöt och salt karamell",
+      "beskrivning": "En perrong i november, kiosken stängd och tåget tio minuter sent — det är den här drycken. Jordnötssmöret gör den tjock och nästan seg, hasselnöten lägger en rostad kant på alltihop och karamellen ringlar sig som mörka ådror genom det gräddvita. Kall, tyst och nästan för söt på slutet, precis som den ska vara.",
+      "smakprofil": [
+        "rostad",
+        "karamellsöt",
+        "salt"
+      ],
+      "farger": {
+        "start": "#6E3B1B",
+        "slut": "#E5A93F"
+      },
+      "emoji": "🍮",
+      "ingredienser": [
+        {
+          "mangd": "2 msk",
+          "vara": "rostade hasselnötter",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": null
+        },
+        {
+          "mangd": "3 msk",
+          "vara": "krämigt jordnötssmör",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "crème fraîche",
+          "not": "eller mascarpone"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "salt karamellsås",
+          "not": null
+        },
+        {
+          "mangd": "2 st",
+          "vara": "frysta bananer i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 kulor",
+          "vara": "vaniljglass",
+          "not": null
+        },
+        {
+          "mangd": "1 krm",
+          "vara": "flingsalt",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa hasselnötterna torra i några sekunder tills de blir ett grovt grus.",
+        "Häll i grädde, jordnötssmör, crème fraîche och karamellsås och kör slätt.",
+        "Lägg i banan och glass sist och kör bara tills det blir tjockt, annars försvinner kylan.",
+        "Smaka av med salt och häll upp direkt."
+      ],
+      "toppa_med": [
+        "hackade rostade hasselnötter",
+        "en tråd salt karamell",
+        "flingsalt"
+      ],
+      "knep": "Ringla karamellsåsen längs glasets insida innan du häller upp, då lägger den sig som ådror och följer med hela vägen ner.",
+      "portioner": 2,
+      "tid_minuter": 6,
+      "bild": "assets/bilder/sista-taget-hem.webp",
+      "bild_alt": "Ett högt glas med tjock, ljusbrun dryck där gräddvita virvlar och mörka karamellstrimmor löper genom glaset. Toppen har hackade hasselnötter, en klick karamell och saltflingor, och runt foten ligger hasselnötter, jordnötter och en liten skål karamellsås.",
+      "bildprompt": "A thick caramel-brown peanut and hazelnut drink with cream-white swirls and dark caramel veins running down the inside of the glass, topped with chopped toasted hazelnuts, a ribbon of salted caramel and flaky salt. Solid saturated deep roasted-brown backdrop that echoes the darkest caramel in the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-15",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "lagunens-tysta-timme",
+      "namn": "Johans tysta lagun",
+      "underrubrik": "Lime och avokado i kokosgrädde, sval som skuggan",
+      "beskrivning": "Kokosgrädden gör den tjock och tyst, avokadon slät som satin, och limen skär upp alltihop med en syra som doftar mer av skal än av saft. I glaset ligger den grunt jadegröna tonen som vatten får när sanden vilar tätt under ytan. Johans glas hör hemma i skuggan timmen innan solen går ner, när stenarna fortfarande är varma under fötterna och luften står stilla.",
+      "smakprofil": [
+        "kokos",
+        "limefrisk",
+        "sval"
+      ],
+      "farger": {
+        "start": "#1FA98C",
+        "slut": "#F3E6B4"
+      },
+      "emoji": "🥥",
+      "ingredienser": [
+        {
+          "mangd": "1½ dl",
+          "vara": "kokosgrädde",
+          "not": "det fasta lagret överst i en kylskåpskall burk kokosmjölk"
+        },
+        {
+          "mangd": "½ st",
+          "vara": "mogen avokado",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 dl",
+          "vara": "frysta ananasbitar",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "cashewnötssmör",
+          "not": "eller tahini"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "lönnsirap",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "lime, saften och det rivna skalet",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "kokosolja",
+          "not": "smält och ljummen, inte het"
+        }
+      ],
+      "gor_sa_har": [
+        "Kör kokosgrädde, avokado, banan, ananas, cashewnötssmör och lönnsirap slätt, gärna en halv minut längre än du tror behövs.",
+        "Häll i limesaften och den ljumma kokosoljan i en tunn stråle medan mixern går, så fördelar sig oljan i stället för att stelna till flagor.",
+        "Rör ner det rivna limeskalet för hand och servera medan drycken fortfarande är riktigt kall."
+      ],
+      "toppa_med": [
+        "rostade kokosflarn",
+        "extra rivet limeskal"
+      ],
+      "knep": "Ställ kokosmjölken i kylen över natten och använd bara det fasta lagret överst, då blir konsistensen tät i stället för utspädd av kokosvattnet.",
+      "portioner": 2,
+      "tid_minuter": 6,
+      "bild": "assets/bilder/lagunens-tysta-timme.webp",
+      "bild_alt": "Ett högt glas med tjock jadegrön smoothie som ljusnar mot kokoskrämigt längst ner, toppad med rostade kokosflarn och rivet limeskal. Vid glasets fot ligger lime, kokosbitar och några myntablad, mot en turkos bakgrund.",
+      "bildprompt": "A thick jade-green smoothie with a soft satiny surface, lightening to pale coconut cream at the very base of the glass, topped with toasted coconut flakes and a fine scatter of lime zest. Solid saturated turquoise-green backdrop that echoes the jade at the top of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-11",
+      "onskad_av": "Johan",
+      "onskemal": "Jag vill ha något med kokos och lime som går att dricka i skuggan när det är alldeles för varmt att göra något annat."
+    },
+    {
+      "id": "frost-pa-hallonriset",
+      "namn": "Frost på hallonriset",
+      "underrubrik": "Hallon, lingon och havtorn med en kula vanilj",
+      "beskrivning": "Kall och skarpt rosa, med den där lilla stöten av havtorn som drar ihop kinderna precis innan vaniljen lägger sig över alltihop. Hallonen knastrar av kärnor och lingonen tar med sig hela skogsbrynet i november. Den doftar som en frysbox som just öppnats en söndagseftermiddag i februari.",
+      "smakprofil": [
+        "syrlig",
+        "fruktig",
+        "krämig"
+      ],
+      "farger": {
+        "start": "#B80F4E",
+        "slut": "#FF8FB0"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "3 dl",
+          "vara": "frysta hallon",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "frysta lingon",
+          "not": "rårörda lingon går lika bra"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "havtornspuré",
+          "not": "eller 1 msk havtornsjuice"
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosgrädde",
+          "not": "det tjocka lagret överst i burken"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "ljust mandelsmör",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "lönnsirap",
+          "not": null
+        },
+        {
+          "mangd": "1 kula",
+          "vara": "vaniljglass",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa hallon, lingon, havtorn och banan slätt.",
+        "Tillsätt kokosgrädde, mandelsmör och lönnsirap och kör tills färgen slår om från mörkröd till lysande rosa.",
+        "Rör ner glassen med en sked allra sist, så att den bara delvis smälter in och lämnar ljusa ådror."
+      ],
+      "toppa_med": [
+        "frysta hallon",
+        "hyvlad vit choklad",
+        "några lingon"
+      ],
+      "knep": "Sila hälften av hallonmixen genom en grov sil innan resten går i, då blir drycken sammetslen men behåller ändå lite knaster.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild": "assets/bilder/frost-pa-hallonriset.webp",
+      "bild_alt": "Ett högt glas med tjock, klarrosa smoothie med ljusa gräddådror, toppad med frostiga hallon, röda lingon och hyvlad vit choklad. Runt glasets fot ligger hallon, lingon och chokladflagor, mot en djupt magentarosa bakgrund.",
+      "bildprompt": "A thick, vivid magenta-pink raspberry and lingonberry smoothie, glossy and opaque with pale ribbons swirled through it, topped with frozen raspberries, a few red lingonberries and shavings of white chocolate. Solid saturated deep magenta backdrop that echoes the darkest berry tone of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-08",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "tisdag-klockan-tre",
+      "namn": "Tisdag klockan tre",
+      "underrubrik": "Kanel, kardemumma och vanilj, kall ur mixern",
+      "beskrivning": "Det smakar som klockan tre en tisdag i november, när bageriet på hörnet just dragit ut plåten och hela gatan luktar smör och kanel. Fast kallt den här gången, tjockt och lent, med kardemumman kvar längst bak i munnen. Havregrynen lämnar en mjuk grynighet efter sig, ungefär som degkanten man alltid smakade på i smyg.",
+      "smakprofil": [
+        "kanelig",
+        "kardemummig",
+        "grynig"
+      ],
+      "farger": {
+        "start": "#A3612C",
+        "slut": "#F0DCBB"
+      },
+      "emoji": "🥐",
+      "ingredienser": [
+        {
+          "mangd": "1 dl",
+          "vara": "mjölk",
+          "not": "eller havredryck"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": null
+        },
+        {
+          "mangd": "4 st",
+          "vara": "mjuka dadlar, urkärnade",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mandelsmör",
+          "not": "eller tahini"
+        },
+        {
+          "mangd": "½ dl",
+          "vara": "havregryn",
+          "not": null
+        },
+        {
+          "mangd": "1 tsk",
+          "vara": "malen kanel",
+          "not": null
+        },
+        {
+          "mangd": "½ tsk",
+          "vara": "malen kardemumma",
+          "not": "helst nystött"
+        },
+        {
+          "mangd": "1 tsk",
+          "vara": "vaniljsocker",
+          "not": null
+        },
+        {
+          "mangd": "2 st",
+          "vara": "frysta bananer i bitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa mjölk, grädde, dadlar och mandelsmör alldeles slätt innan något fryst går i.",
+        "Tillsätt havregryn, kanel, kardemumma och vaniljsocker och kör tio sekunder till.",
+        "Lägg i bananbitarna sist och mixa tills det blir tjockt, blankt och ljust beige."
+      ],
+      "toppa_med": [
+        "grovhackad rostad mandel",
+        "nystött kardemumma",
+        "en kanelstång"
+      ],
+      "knep": "Stöt kardemumman i mortel precis innan du mixar — den färdigmalda har tappat sin doft långt före bäst före-datumet.",
+      "portioner": 2,
+      "tid_minuter": 5,
+      "bild": "assets/bilder/tisdag-klockan-tre.webp",
+      "bild_alt": "Ett högt glas med tjock ljusbeige smoothie prickig av havregryn, toppad med grovhackad mandel, kardemummakapslar och en kanelstång. Runt glasets fot ligger kanelstänger, stjärnanis, havregryn och mandlar, mot en kanelbrun bakgrund.",
+      "bildprompt": "A thick, opaque latte-beige smoothie with a soft caramel sheen, flecked with ground cinnamon and oat, topped with coarsely chopped toasted almonds, cracked cardamom and a single cinnamon stick leaning against the rim. Solid saturated warm cinnamon-brown backdrop that echoes the toasted colour of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-07-04",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "papayas-langa-siesta",
+      "namn": "Papayas långa siesta",
+      "underrubrik": "Papaya, banan och vaniljglass med en skvätt lime",
+      "beskrivning": "Papaya smakar av sol som legat kvar i en frukt hela eftermiddagen, mjuk och nästan smörig med en ton av melon och honung. Vaniljglassen smälter in och gör den korallrosa och alldeles slät, medan limen håller emot precis lagom mycket. Den påminner om en kiosk vid en het gata där fläkten står och vrider långsamt på sig.",
+      "smakprofil": [
+        "mjuk",
+        "vaniljsöt",
+        "solig"
+      ],
+      "farger": {
+        "start": "#F76F52",
+        "slut": "#FFCE8A"
+      },
+      "emoji": "🌺",
+      "ingredienser": [
+        {
+          "mangd": "½ st",
+          "vara": "mogen papaya, urkärnad",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": "det tjocka lagret överst i burken"
+        },
+        {
+          "mangd": "2 st",
+          "vara": "mjuka dadlar, urkärnade",
+          "not": "blötlägg i varmt vatten tio minuter om de är torra"
+        },
+        {
+          "mangd": "2 kulor",
+          "vara": "vaniljglass",
+          "not": "gärna en med riktiga vaniljfrön"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "crème fraîche",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "limesaft",
+          "not": null
+        },
+        {
+          "mangd": "1 nypa",
+          "vara": "flingsalt",
+          "not": "lyfter fram blomsötman i papayan"
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa papaya, banan, kokosmjölk, dadlar och limesaft tills det inte finns en enda tråd kvar.",
+        "Lägg i glassen och crème fraîchen och kör bara några sekunder till, så att luften stannar kvar.",
+        "Smaka av med flingsalt och häll upp i ett kylskåpskallt glas."
+      ],
+      "toppa_med": [
+        "tunna limeskivor",
+        "en klick vispad kokosgrädde",
+        "strimlor av torkad mango"
+      ],
+      "knep": "Riv över lite färsk lime på papayaköttet och låt det stå fem minuter innan det går i mixern, då blir smaken rundare och mindre parfymerad.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild": "assets/bilder/papayas-langa-siesta.webp",
+      "bild_alt": "Ett högt glas med tjock korallrosa smoothie som övergår i aprikosgult upptill, toppad med vispad kokosgrädde, två limeskivor och strimlor av torkad mango. Runt glasets fot ligger halva papayor, lime och torkad mango, mot en korallorange bakgrund.",
+      "bildprompt": "A thick coral-pink papaya smoothie, soft and opaque, fading into a warm apricot cream near the top of the glass, crowned with a swirl of whipped coconut cream, two thin lime wheels and shreds of dried mango. Solid saturated coral-orange backdrop that echoes the coral body of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-30",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "mossljus-i-maj",
+      "namn": "Birgittas mossljus i maj",
+      "underrubrik": "Granskottssirap, krusbär och en klick crème fraîche",
+      "beskrivning": "Ljusgrön som mossa i motljus, med granskottens hartsiga citrondoft som slår upp så fort du lutar dig över glaset. Krusbären lägger en sur kant längst fram och crème fraîchen rundar av den igen. Birgittas pappa kokade saft på granskott varje maj, och det här är samma smak fast kall — tidig maj, när barren ännu är så mjuka att man tuggar på dem hela vägen hem.",
+      "smakprofil": [
+        "hartsig",
+        "citrusfrisk",
+        "len"
+      ],
+      "farger": {
+        "start": "#1E5B32",
+        "slut": "#BCD84E"
+      },
+      "emoji": "🌲",
+      "ingredienser": [
+        {
+          "mangd": "2 msk",
+          "vara": "granskottssirap",
+          "not": "eller 2 msk honung och rivet skal av en halv citron"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "frysta krusbär",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "½ st",
+          "vara": "mogen avokado",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosgrädde",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "ljus tahini",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "crème fraîche",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa krusbär, banan, avokado och granskottssirap tills allt är helt slätt och färgen ljusnar mot mossgrönt.",
+        "Tillsätt kokosgrädde, tahini, crème fraîche och honung och kör bara några sekunder till.",
+        "Smaka av — behöver den mer skog rör du i ytterligare en tesked sirap."
+      ],
+      "toppa_med": [
+        "en klick crème fraîche",
+        "färska granskott om det är maj",
+        "rivet citronskal"
+      ],
+      "knep": "Granskott plockas de två veckor de är ljusgröna och mjuka — koka dem med lika delar socker och vatten, så har du sirapen kvar året runt.",
+      "portioner": 2,
+      "tid_minuter": 7,
+      "bild": "assets/bilder/mossljus-i-maj.webp",
+      "bild_alt": "Ett högt glas med tjock mossgrön smoothie, toppad med en klick crème fraîche och några ljusgröna granskott. Runt glasets fot ligger mossa, granskott och en liten skål crème fraîche, mot en djupt grangrön bakgrund.",
+      "bildprompt": "A thick moss-green smoothie with a soft creamy sheen, topped with a spoonful of crème fraîche and a few bright pale-green spring spruce tips. Solid saturated deep forest-green backdrop that echoes the darkest green of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-26",
+      "onskad_av": "Birgitta",
+      "onskemal": "Min pappa kokade alltid saft på granskott i maj. Går den smaken att få in i ett glas?"
+    },
+    {
+      "id": "gyllene-pistage",
+      "namn": "Gyllene pistage",
+      "underrubrik": "Saffran, pistage och vaniljglass, silkeslent kallt",
+      "beskrivning": "Saffranet möter dig redan innan glaset når munnen, torrt och honungsvarmt i doften. Smaken är rund och nötig med en svag beska från pistagen, och sedan kommer vaniljen som en lång, sval efterklang. Gammalt guld upptill, blekt pistagegrönt nedåt — en dryck för den blå timmen i december, när ljusen tänts alldeles för tidigt på eftermiddagen.",
+      "smakprofil": [
+        "nötig",
+        "saffransdoftande",
+        "silkeslen"
+      ],
+      "farger": {
+        "start": "#D98E1F",
+        "slut": "#CFE0A2"
+      },
+      "emoji": "🥜",
+      "ingredienser": [
+        {
+          "mangd": "1 dl",
+          "vara": "mjölk",
+          "not": "eller mandeldryck"
+        },
+        {
+          "mangd": "1 nypa",
+          "vara": "saffran",
+          "not": "stött med en tesked socker"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosgrädde",
+          "not": "det fasta lagret överst i burken"
+        },
+        {
+          "mangd": "½ dl",
+          "vara": "skalade pistagenötter",
+          "not": "osaltade"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mandelmjöl",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "flytande honung",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 kulor",
+          "vara": "vaniljglass",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Värm en skvätt av mjölken, lägg i det stötta saffranet och låt det dra medan du plockar fram resten.",
+        "Mixa pistagenötterna med den kalla mjölken och kokosgrädden tills det inte knastrar längre.",
+        "Tillsätt saffransmjölken, mandelmjölet, honungen och bananen och kör slätt och blankt.",
+        "Vänd ner glassen med några korta pulser precis före servering."
+      ],
+      "toppa_med": [
+        "grovhackade pistagenötter",
+        "några saffranstrådar",
+        "riven vit choklad"
+      ],
+      "knep": "Stöt saffranet med en tesked socker och blöt det i varm mjölk i tio minuter, annars stannar både färgen och doften kvar inne i trådarna.",
+      "portioner": 1,
+      "tid_minuter": 8,
+      "bild": "assets/bilder/gyllene-pistage.webp",
+      "bild_alt": "Ett högt glas med tjock smoothie som är gyllengul upptill och blekt pistagegrön nedåt, toppad med hackade pistagenötter, saffranstrådar och vit choklad. Runt glasets fot ligger pistagenötter, saffranstrådar och bitar av vit choklad, mot en saffransgul bakgrund.",
+      "bildprompt": "A thick, silky smoothie the colour of old gold shading towards pale pistachio green, speckled with tiny green nut flecks, topped with coarsely chopped pistachios, a few crimson saffron threads and shavings of white chocolate. Solid saturated saffron-gold backdrop that echoes the golden top of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-23",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "ljust-anda-till-nio",
+      "namn": "Ljust ända till nio",
+      "underrubrik": "Syrlig rabarber, vaniljglass och kall grädde",
+      "beskrivning": "Rosa som en junihimmel strax efter nio, när det fortfarande är ljust ute men luften har svalnat mot armarna. Rabarbern är syrlig och tvär i första klunken, sedan kommer vaniljen och den kalla grädden och lägger sig som en filt över alltihop. Det smakar trädgård, jordkällare och den där skålen man åt direkt ur, sittande på trappan.",
+      "smakprofil": [
+        "tvär",
+        "vaniljsöt",
+        "krämig"
+      ],
+      "farger": {
+        "start": "#E0577E",
+        "slut": "#FBDCC9"
+      },
+      "emoji": "🍨",
+      "ingredienser": [
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mascarpone",
+          "not": "eller crème fraîche"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "1 nypa",
+          "vara": "vaniljpulver",
+          "not": "eller fröna ur en halv stång"
+        },
+        {
+          "mangd": "2 dl",
+          "vara": "fryst rabarber i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 kulor",
+          "vara": "vaniljglass",
+          "not": "riktigt kalla"
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa grädde, mascarpone, honung och vanilj till en slät och blank bas.",
+        "Lägg i rabarber och banan och kör tills färgen blir jämnt rosa hela vägen upp.",
+        "Sänk ner glasskulorna sist och pulsa bara några sekunder, så att allt förblir kallt och tjockt."
+      ],
+      "toppa_med": [
+        "en klick löst vispad grädde",
+        "smulad mandelbiskvi",
+        "en tunn strimla rabarber"
+      ],
+      "knep": "Ugnsbaka rabarbern med lite strösocker och frys den i bitar först — färgen blir djupare rosa och trådarna försvinner helt i mixern.",
+      "portioner": 2,
+      "tid_minuter": 6,
+      "bild": "assets/bilder/ljust-anda-till-nio.webp",
+      "bild_alt": "Ett högt glas med tjock dovrosa rabarbersmoothie, toppad med vispad grädde, smulad mandelbiskvi och en upprullad strimla rabarber. Runt glasets fot ligger rabarberstjälkar, mandlar och biskvier, mot en hallonrosa bakgrund.",
+      "bildprompt": "A thick dusty-rose rhubarb smoothie, opaque and creamy with a pale marbled swirl near the rim, crowned with a soft cloud of whipped cream, crumbled almond biscuit and one thin ribbon of pink rhubarb. Solid saturated raspberry-pink backdrop that echoes the deepest tone in the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-19",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "midnatt-i-mocka",
+      "namn": "Midnatt i mocka",
+      "underrubrik": "Mörk kakao, kall espresso och dadel med flingsalt",
+      "beskrivning": "Smaken börjar i mörk kakao, går över i kallt kaffe och landar mjukt i dadel, som en sen kväll i ett kök där bara spisljuset är tänt. Ytan är blank och släpper bara igenom en aning plommonlila längs kanterna. Saltet kommer allra sist och gör klunken skarpare än man väntar sig.",
+      "smakprofil": [
+        "mörk",
+        "kaffebitter",
+        "krämig",
+        "salt"
+      ],
+      "farger": {
+        "start": "#2B1533",
+        "slut": "#8A5A34"
+      },
+      "emoji": "☕",
+      "ingredienser": [
+        {
+          "mangd": "4 st",
+          "vara": "mjuka dadlar, urkärnade",
+          "not": "blötlägg i varmt vatten om de är torra"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "kall espresso",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mascarpone",
+          "not": null
+        },
+        {
+          "mangd": "2 st",
+          "vara": "frysta bananer i bitar",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mörk kakao",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "kokosolja",
+          "not": null
+        },
+        {
+          "mangd": "1 krm",
+          "vara": "flingsalt",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Brygg espresson och ställ den i frysen medan du kärnar ur dadlarna.",
+        "Mixa dadlar, espresso, grädde och mascarpone helt slätt innan du släpper ner banan, kakao och kokosolja.",
+        "Kör på högsta fart tills ytan blir blank och trög, och salta allra sist."
+      ],
+      "toppa_med": [
+        "riven mörk choklad",
+        "ett stänk kall espresso",
+        "flingsalt"
+      ],
+      "knep": "Frys espresson i en isbitsform dagen innan, så blir drycken iskall utan att smaken tunnas ut av vanlig is.",
+      "portioner": 2,
+      "tid_minuter": 5,
+      "bild": "assets/bilder/midnatt-i-mocka.webp",
+      "bild_alt": "Ett högt glas med nästan svartbrun, tjock dryck med blank yta och ett lager kall espresso överst, toppad med rivna chokladflagor och grova saltflingor. Runt glasets fot ligger mjuka dadlar och kaffebönor, mot en mörkt plommonlila bakgrund.",
+      "bildprompt": "An almost black-brown cocoa and espresso drink with a glossy, thick surface, topped with dark chocolate shavings, a splash of cold espresso and coarse flaky salt. Solid saturated deep aubergine-purple backdrop that echoes the darkest tone of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-15",
+      "onskad_av": null,
+      "onskemal": null
+    },
+    {
+      "id": "sesam-i-augusti",
+      "namn": "Sesam i augusti",
+      "underrubrik": "Tahini, halva och honung med riven mandelmassa",
+      "beskrivning": "Ljuset i glaset är samma som klockan sju en augustikväll: gyllene och lite dammigt. Sesamen från tahinin och halvan lägger sig som en varm ton under honungen, och den rivna mandelmassan lämnar små söta prickar mot tungan. Doften är torr och nötig, som ett rum där någon nyss rostat sesamfrön i en het panna.",
+      "smakprofil": [
+        "gyllene",
+        "sesamlen",
+        "honungssöt"
+      ],
+      "farger": {
+        "start": "#DE9412",
+        "slut": "#F8EBC9"
+      },
+      "emoji": "🍯",
+      "ingredienser": [
+        {
+          "mangd": "1½ dl",
+          "vara": "kokosgrädde",
+          "not": "det fasta lagret överst i burken"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "ljus tahini",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "flytande honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "1 st",
+          "vara": "fryst banan i bitar",
+          "not": null
+        },
+        {
+          "mangd": "50 g",
+          "vara": "halva, smulad",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "mandelmassa, grovriven",
+          "not": null
+        },
+        {
+          "mangd": "1 nypa",
+          "vara": "flingsalt",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Skrapa ur den fasta kokosgrädden och mixa den med tahini och honung tills ytan blir blank.",
+        "Lägg i banan, halva och mandelmassa och kör tills konsistensen är len som mjuk glass.",
+        "Smaka av med salt och mixa två sekunder till."
+      ],
+      "toppa_med": [
+        "smulad halva",
+        "rostade sesamfrön",
+        "en tråd honung"
+      ],
+      "knep": "Riv mandelmassan grovt och rör ner hälften först efter mixningen, då finns små söta öar kvar i varje klunk.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild": "assets/bilder/sesam-i-augusti.webp",
+      "bild_alt": "Ett högt glas med tjock, ljusgyllene dryck med krämig yta, toppad med smulad halva och rostade sesamfrön. Vid glasets fot ligger bitar av halva, en hög sesamfrön och en burk honung med sked, mot en ockragul bakgrund.",
+      "bildprompt": "A pale golden, glossy sesame and honey drink the colour of warm sand, thick and creamy, topped with crumbled halva, toasted sesame seeds and a thin ribbon of honey. Solid saturated deep golden-ochre backdrop that echoes the honeyed tone of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "publicerad": "2026-06-11",
+      "onskad_av": null,
+      "onskemal": null
+    }
+  ]
+}

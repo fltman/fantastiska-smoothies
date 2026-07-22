@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Fantastiska smoothies — inkorgen kollas en gång i timmen.
+
+  Hittas ett önskemål bryggs det direkt, så den som mailar har sin smoothie inom
+  timmen. Är inkorgen tom avslutar körningen tyst utan att kosta något. "Husets
+  egen" bryggs bara om ingenting publicerats det senaste dygnet — se
+  HUSETS_EGEN_TIMMAR i generator/.env.
+
+  Ladda den så här:
+
+      mkdir -p ~/Projekt/fantastiska-smoothies/generator/logg
+      cp com.bjarby.smoothies.plist ~/Library/LaunchAgents/
+      launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.bjarby.smoothies.plist
+
+  Kör en gång på direkten:   launchctl kickstart -p gui/$(id -u)/com.bjarby.smoothies
+  Ta bort den igen:          launchctl bootout gui/$(id -u)/com.bjarby.smoothies
+
+  Loggen ligger i generator/logg/brygg.log; launchd:s egen utskrift hamnar i
+  launchd.out och launchd.err i samma mapp.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.bjarby.smoothies</string>
+
+	<key>ProgramArguments</key>
+	<array>
+		<string>/opt/homebrew/bin/python3</string>
+		<string>-m</string>
+		<string>generator.brygg</string>
+	</array>
+
+	<key>WorkingDirectory</key>
+	<string>/Users/andersbj/Projekt/fantastiska-smoothies</string>
+
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+		<key>PYTHONUNBUFFERED</key>
+		<string>1</string>
+	</dict>
+
+	<key>StandardOutPath</key>
+	<string>/Users/andersbj/Projekt/fantastiska-smoothies/generator/logg/launchd.out</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/andersbj/Projekt/fantastiska-smoothies/generator/logg/launchd.err</string>
+
+	<key>RunAtLoad</key>
+	<false/>
+
+	<!-- En gång i timmen. StartInterval istället för StartCalendarInterval:
+	     har datorn sovit kör launchd en gång direkt vid uppvaknandet istället
+	     för att hoppa över alla missade timmar. -->
+	<key>StartInterval</key>
+	<integer>3600</integer>
+
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>LowPriorityIO</key>
+	<true/>
+</dict>
+</plist>

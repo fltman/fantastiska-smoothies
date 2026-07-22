@@ -1,0 +1,22 @@
+# Hemligheter — får aldrig commitas
+generator/.env
+*.env
+!generator/.env.example
+
+# Obsidian-valv: bara för mig, syncas aldrig
+vault/
+
+# Genererat
+generator/__pycache__/
+generator/.cache/
+generator/logg/
+*.pyc
+.venv/
+venv/
+
+# Råa bilder innan webp-konvertering
+site/assets/bilder/*.png
+arbetsyta/
+
+# macOS
+.DS_Store

@@ -1,0 +1,161 @@
+# =============================================================================
+#  Fantastiska smoothies — Apache
+#
+#  Allt som beror på en modul ligger inuti <IfModule>, så att sajten fungerar
+#  även om one.com skulle sakna någon av dem. Ingenting här får kunna ge 500.
+#
+#  Filen är skriven för att fungera oavsett var sajten bor: som rot på
+#  underdomänen smoothies.bjarby.com (httpd.www/smoothies/, se DEPLOY.md 1.1)
+#  eller i en undermapp under webbroten. Därför finns ingen RewriteBase och
+#  inga hårdkodade sökvägsprefix i omskrivningarna.
+# =============================================================================
+
+
+# --- Teckenkodning -----------------------------------------------------------
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .css .js .json .html .htm .svg .xml
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
+
+
+# --- Startsida, kataloglistning och innehållsförhandling ---------------------
+
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+<IfModule mod_negotiation.c>
+  # Utan detta kan /onska serveras direkt av onska.php förbi omskrivningarna.
+  Options -MultiViews
+</IfModule>
+
+
+# --- Felsida -----------------------------------------------------------------
+# Sökvägen räknas från webbroten. Ligger sajten i en undermapp som också är
+# synlig i adressen (bjarby.com/smoothies/) ska raden lyda
+# "ErrorDocument 404 /smoothies/404.php". Omskrivningen längst ned fångar ändå
+# det mesta, så en felställd rad här ger aldrig mer än Apaches egen felsida.
+
+ErrorDocument 404 /404.php
+
+
+# --- Snygga adresser ---------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # data/ och inc/ är sajtens skafferi, inte dess skyltfönster.
+  RewriteRule ^(?:data|inc)(?:/|$) - [F,L]
+
+  # Finns filen eller mappen på riktigt serveras den som den är. Regeln stoppar
+  # också omskrivningarna nedan från att gå i cirkel: en intern omskrivning
+  # kör igenom regeluppsättningen en gång till, och då finns målfilen.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^smoothie/([a-z0-9-]+)/?$  smoothie.php?id=$1  [L,QSA]
+  RewriteRule ^onska/?$                  onska.php           [L,QSA]
+  RewriteRule ^om/?$                     om.php              [L,QSA]
+
+  # Allt annat som inte finns får sajtens egen 404-sida, som sätter statuskoden
+  # själv. Filändelser undantas: en bild som saknas ska svara billigt, inte med
+  # ett helt HTML-dokument i bildens ställe.
+  RewriteCond %{REQUEST_URI} !\.(?:webp|png|jpe?g|gif|svg|ico|css|js|woff2?|map|txt|xml)$ [NC]
+  RewriteRule ^ 404.php [L]
+</IfModule>
+
+
+# --- Filer som aldrig lämnas ut ----------------------------------------------
+# Punktfiler, all JSON, generatorns filer och de inkluderade PHP-delarna.
+# Gäller även om mod_rewrite skulle saknas. Påverkar inte include/require.
+
+<IfModule mod_authz_core.c>
+  <FilesMatch "(^\.|^(?:config|functions|header|footer|smoothie-kort)\.php$|\.(?:json|md|py|log|sql|ini|bak|example|dist|sh|yml|yaml)$)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+  <IfModule mod_access_compat.c>
+    <FilesMatch "(^\.|^(?:config|functions|header|footer|smoothie-kort)\.php$|\.(?:json|md|py|log|sql|ini|bak|example|dist|sh|yml|yaml)$)">
+      Order allow,deny
+      Deny from all
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+
+# --- Cache -------------------------------------------------------------------
+# Bilderna heter samma sak som sin smoothie och byts aldrig ut — de får ligga
+# ett år. Typsnitten likaså. CSS och JS har inget versionsnummer i filnamnet,
+# så de får en vecka: länge nog att spara förfrågningar, kort nog att en
+# handpåläggning i style.css hinner ut till alla. PHP-sidorna kan ändras varje
+# timme och cachas aldrig.
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                       "access plus 1 hour"
+
+  ExpiresByType image/webp             "access plus 1 year"
+  ExpiresByType image/png              "access plus 1 year"
+  ExpiresByType image/jpeg             "access plus 1 year"
+  ExpiresByType image/gif              "access plus 1 year"
+  ExpiresByType image/svg+xml          "access plus 1 year"
+  ExpiresByType image/x-icon           "access plus 1 year"
+
+  ExpiresByType font/woff2             "access plus 1 year"
+
+  ExpiresByType text/css               "access plus 1 week"
+  ExpiresByType text/javascript        "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+
+  ExpiresByType text/html              "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:webp|png|jpe?g|gif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(?:css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  <FilesMatch "\.php$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+  </FilesMatch>
+
+  # ETag-brus bort — Last-Modified räcker gott.
+  Header unset ETag
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # CONTRACT §9: ingen extern resurs laddas. Här står det som en regel
+  # webbläsaren själv upprätthåller. 'unsafe-inline' i style-src behövs för
+  # smoothiernas inline-satta --start och --slut; data: i img-src för den
+  # inbakade favikonen. Ingen annan källa än sajten själv släpps igenom.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'"
+</IfModule>
+
+FileETag None
+
+
+# --- Komprimering ------------------------------------------------------------
+# Bara text. Bilderna är redan webp och blir inte mindre av att packas igen.
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE text/javascript application/javascript
+  AddOutputFilterByType DEFLATE application/json image/svg+xml
+</IfModule>

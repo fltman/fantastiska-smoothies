@@ -1,0 +1,1514 @@
+@charset "UTF-8";
+/* ============================================================================
+   FANTASTISKA SMOOTHIES — style.css
+
+   En enda fil. Inga importer, inga CDN, inga nedladdade typsnitt, inga
+   ikonbibliotek, inga trackers. Allt som ritas här ritas av webbläsaren själv
+   (CONTRACT §9). Mobilen först.
+
+   Grundprincipen (ART-DIRECTION §0):
+     Scenen är neutral och varm. Allt som är färgstarkt kommer från datan.
+     Varje smoothie sätter --start och --slut inline på sitt yttersta element,
+     och CSS får bara läsa dem. Ingen regel här nedanför hårdkodar någonsin en
+     smoothiefärg (CONTRACT §5). De enda fasta färgerna är scenens egna:
+     papper, bläck, ram, skugga.
+
+   Fyra saker som aldrig görs:
+     1. Aldrig text ovanpå en mättad smoothiegradient — text ligger på
+        --papper, --yta eller en pastell, där kontrasten är uträknad.
+     2. Aldrig ett startläge med opacity: 0 som bara en animation tar bort.
+     3. Aldrig en extern resurs.
+     4. Aldrig en fast pixelhöjd på något som innehåller text.
+
+   INNEHÅLL
+     1.  Reset och grundinställningar
+     2.  Rotvariabler — färg, typ, mått, rum, radie, skugga, rörelse
+     3.  Mörkt läge — bara omdefinierade variabler
+     4.  Datastyrd färg — reserver, pasteller, härledda ramar
+     5.  Bas — body, rubriker, text, länkar
+     6.  Hjälpare — bredd, visuellt-dold, hopp-till-innehall, etikett, knapp
+     7.  Layout — omslag, sidhuvud, sidfot
+     8.  Hero, blobbhavet och det rinnande strecket   (grepp 1 och 3)
+     9.  Galleri, kort och kortlyftet                 (grepp 2)
+     10. Smoothiesidan — topp, meta, önskeruta, recept, grannar
+     11. Önskesidan, innehållssidor och prickkonfettin (grepp 4)
+     12. Fokus och tangentbord
+     13. Små skärmar
+     14. Utskrift
+     15. Rörelseavstängning — absolut sist
+   ========================================================================== */
+
+
+/* ============================================================================
+   1. RESET OCH GRUNDINSTÄLLNINGAR
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body,
+h1, h2, h3, h4, p,
+figure, figcaption, blockquote,
+ul, ol, dl, dd { margin: 0; }
+
+/* En lista med klass är alltid layout, aldrig en punktlista. */
+ul[class], ol[class] { padding: 0; list-style: none; }
+
+/* Bilder är alltid krympbara — inget får spränga en 360 px-skärm. */
+img, svg, video, canvas {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+input, button, textarea, select { font: inherit; color: inherit; }
+
+/* Ankarhopp får inte hamna bakom det klibbiga sidhuvudet. */
+html { scroll-padding-block-start: 5.5rem; }
+:target { scroll-margin-block-start: 5.5rem; }
+
+
+/* ============================================================================
+   2. ROTVARIABLER
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* --- 2.1 Scenen, ljust läge (ART-DIRECTION §1.1) ------------------------
+     Varmt, lite gräddvitt papper. Bläcket är brunsvart, aldrig rent #000.
+     Kontrasterna är uträknade i §1.3: --blck på --papper ger 16,27:1 och
+     --dis på --papper 6,26:1. Kravet är 4,5:1.                            */
+  --papper:      #FFF9F2;      /* sidbakgrund, varmt off-white              */
+  --yta:         #FFFFFF;      /* kort, receptkolumner, upphöjda ytor       */
+  --yta-hog:     #FFFFFF;      /* hovrad/aktiv yta                          */
+  --blck:        #241A16;      /* all brödtext och alla rubriker            */
+  --dis:         #6B5A52;      /* sekundär text: meta, datum, noter         */
+  --ram:         #E7DACC;      /* dekorativa linjer, avdelare               */
+  --ram-stark:   #9C8779;      /* kontrollgränser — klarar 3:1              */
+  --skugga:      28 16 10;     /* rgb-komponenter, varm brun skugga         */
+  --slojja:      255 249 242;  /* = --papper som rgb, för slöjor            */
+
+  /* --- 2.2 Typsnittsstackar (ART-DIRECTION §2.1) -------------------------
+     Bara systemfonter. ui-rounded ger SF Pro Rounded på macOS och iOS —
+     mjuka, glada bokstavsformer utan en enda nedladdad byte. Windows och
+     Android faller till Segoe UI Variable Display respektive Roboto, som är
+     tighta och självsäkra i stora grader.                                  */
+  --typ-rubrik: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont,
+                "Segoe UI Variable Display", "Segoe UI", Roboto,
+                "Helvetica Neue", Arial, sans-serif;
+  --typ-brod:   system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI Variable Text", "Segoe UI", Roboto,
+                "Helvetica Neue", Arial, sans-serif;
+  /* Bara till ingrediensmängderna, så att 1 dl och 1 ½ msk radar upp sig. */
+  --typ-siffra: ui-monospace, SFMono-Regular, "SF Mono", "Cascadia Mono",
+                "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* --- 2.3 Typskala, flytande 360 px → 1440 px (ART-DIRECTION §2.2) ----- */
+  --steg--1: clamp(0.8125rem, 0.79rem + 0.11vw, 0.875rem);  /* 13 → 14 px */
+  --steg-0:  clamp(1rem,      0.97rem + 0.14vw, 1.0625rem); /* 16 → 17 px */
+  --steg-1:  clamp(1.125rem,  1.07rem + 0.25vw, 1.25rem);   /* 18 → 20 px */
+  --steg-2:  clamp(1.3125rem, 1.20rem + 0.50vw, 1.5rem);    /* 21 → 24 px */
+  --steg-3:  clamp(1.5rem,    1.28rem + 1.00vw, 2.125rem);  /* 24 → 34 px */
+  --steg-4:  clamp(1.875rem,  1.47rem + 1.80vw, 3rem);      /* 30 → 48 px */
+  --steg-5:  clamp(2.375rem,  1.66rem + 3.18vw, 4.25rem);   /* 38 → 68 px */
+  --steg-6:  clamp(3rem,      1.65rem + 6.00vw, 6rem);      /* 48 → 96 px */
+
+  --rad-tat:        1.02;    /* steg 5–6 */
+  --rad-rubrik:     1.12;    /* steg 2–4 */
+  --rad-brod:       1.6;     /* steg 0–1 */
+  --sparr-tat:     -0.03em;
+  --sparr-etikett:  0.08em;
+
+  /* Radlängder */
+  --matt-brod:    62ch;   /* löpande text                                  */
+  --matt-rubrik:  16ch;   /* bara steg 5–6: hero__titel, smoothie__titel   */
+  --matt-ingress: 46ch;
+
+  /* --- 2.4 Mellanrum (ART-DIRECTION §3.1) ------------------------------ */
+  --rum-0: 0.25rem;  --rum-1: 0.5rem;   --rum-2: 0.75rem;  --rum-3: 1rem;
+  --rum-4: 1.5rem;   --rum-5: 2rem;     --rum-6: 3rem;     --rum-7: 4.5rem;
+  --rum-8: 6.5rem;
+  --kant:    clamp(1rem, 4vw, 2.5rem);  /* sidmarginal, 16 px vid 360 px  */
+  --sektion: clamp(3rem, 7vw, 6rem);    /* lodrätt mellan sektioner       */
+
+  /* --- 2.5 Radier (ART-DIRECTION §3.2) ---------------------------------
+     Generösa och mjuka. Regel: ju större yta, desto större radie. En
+     bildruta får aldrig mindre radie än kortet den ligger i.              */
+  --radie-0:    0.5rem;     /* etiketter, små ytor            */
+  --radie-1:    0.875rem;   /* fält, små knappar, fokusring   */
+  --radie-2:    1.25rem;    /* knappar, önskeruta             */
+  --radie-3:    1.75rem;    /* kort, receptkolumner           */
+  --radie-4:    2.5rem;     /* bildrutor, smoothie__bild      */
+  --radie-rund: 999px;      /* piller                          */
+
+  /* --- 2.6 Skuggor (ART-DIRECTION §3.3) --------------------------------
+     Varm brun, aldrig grå. Två lager: en tät kontaktskugga och en vid mjuk. */
+  --lyft-0: 0 1px 2px rgb(var(--skugga) / 0.06);
+  --lyft-1: 0 1px 2px rgb(var(--skugga) / 0.07),
+            0 4px 12px -4px rgb(var(--skugga) / 0.10);
+  --lyft-2: 0 2px 4px rgb(var(--skugga) / 0.08),
+            0 12px 28px -8px rgb(var(--skugga) / 0.14);
+  --lyft-3: 0 4px 8px rgb(var(--skugga) / 0.10),
+            0 28px 56px -16px rgb(var(--skugga) / 0.20);
+
+  /* Platshållare för mörkt lägets hårfina ovankant. Måste vara en giltig
+     skugga och inte "none", eftersom den ingår i kommaseparerade listor. */
+  --hairline: 0 0 0 0 rgb(0 0 0 / 0);
+
+  /* --- 2.7 Rörelse (ART-DIRECTION §7.1) -------------------------------- */
+  --rorelse-snabb: 140ms;   /* knapptryck, färgbyte  */
+  --rorelse-mjuk:  260ms;   /* kortlyft, fokusring   */
+  --rorelse-lang:  520ms;   /* bildzoom              */
+  --lugn:  cubic-bezier(0.2, 0.7, 0.3, 1);      /* standard in och ut     */
+  --studs: cubic-bezier(0.34, 1.4, 0.5, 1);     /* knappar, lekfullt      */
+  --mjukt-fram-tillbaka: cubic-bezier(0.45, 0.05, 0.55, 0.95); /* loopar  */
+}
+
+
+/* ============================================================================
+   3. MÖRKT LÄGE
+   Samma varma temperatur, nedsläckt. Inte blå natt — ett mörkt trärum.
+   Här står bara omdefinierade variabler. Ingen layout, ingen ny regel.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papper:    #17110F;
+    --yta:       #221A17;
+    --yta-hog:   #2C221E;
+    --blck:      #FBF3EC;
+    --dis:       #B7A69C;
+    --ram:       #3A2D28;
+    --ram-stark: #7A6C64;
+    --skugga:    0 0 0;
+    --slojja:    23 17 15;
+
+    --lyft-0: 0 1px 2px rgb(0 0 0 / 0.35);
+    --lyft-1: 0 1px 2px rgb(0 0 0 / 0.40), 0 4px 12px -4px rgb(0 0 0 / 0.45);
+    --lyft-2: 0 2px 4px rgb(0 0 0 / 0.45), 0 12px 28px -8px rgb(0 0 0 / 0.55);
+    --lyft-3: 0 4px 8px rgb(0 0 0 / 0.50), 0 28px 56px -16px rgb(0 0 0 / 0.65);
+
+    /* Hårfin ljus ovankant så att varje upphöjd yta lyfter ur mörkret. */
+    --hairline: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+}
+
+
+/* ============================================================================
+   4. DATASTYRD FÄRG
+   ========================================================================== */
+
+/* 4.1 Reserver -------------------------------------------------------------
+   Inline-stilen från PHP vinner alltid när den finns. Det här syns bara om
+   datan saknas eller om h_farg() vägrade ett värde — och då är reserven
+   scenens egna neutraler, aldrig en påhittad fruktfärg. Reserven ligger
+   också på :root så att varje element alltid har ett definierat --start,
+   även utanför ett kort: en odefinierad var() gör hela deklarationen ogiltig
+   och bakgrunden hade då blivit genomskinlig i stället för --yta.          */
+:root,
+.kort,
+.smoothie,
+.hero,
+.galleri,
+.hero__blobbar {
+  --start: var(--ram);
+  --slut:  var(--ram-stark);
+}
+
+/* 4.2 Härledda toningar ----------------------------------------------------
+   Text får aldrig ligga på råa --start/--slut. Behöver en yta smaka smoothie
+   bakom text används pastellen. Kontrollräkningen i ART-DIRECTION §1.4 visar
+   att --blck klarar minst 7,6:1 mot pastellen oavsett vilken färg datan ger,
+   i båda lägena. Därför gäller: på en pastellyta används enbart --blck som
+   textfärg — aldrig --dis.
+
+   Basvärdena är rena reserver för en webbläsare utan color-mix; @supports
+   nedanför blandar in smoothiens färg när det går.                         */
+:root,
+.kort,
+.smoothie {
+  --pastell:      var(--yta);
+  --pastell-slut: var(--yta);
+  --rand-etikett: var(--ram);
+  --rand-steg:    var(--ram);
+  --rand-ruta:    var(--ram);
+  --rand-hov:     var(--ram-stark);
+}
+
+@supports (color: color-mix(in oklab, #000 14%, #fff)) {
+  :root,
+  .kort,
+  .smoothie {
+    --pastell:      color-mix(in oklab, var(--start) 14%, var(--yta));
+    --pastell-slut: color-mix(in oklab, var(--slut)  14%, var(--yta));
+    --rand-etikett: color-mix(in oklab, var(--start) 30%, transparent);
+    --rand-steg:    color-mix(in oklab, var(--start) 35%, transparent);
+    --rand-ruta:    color-mix(in oklab, var(--start) 35%, var(--ram));
+    --rand-hov:     color-mix(in oklab, var(--start) 40%, var(--ram));
+  }
+  /* Mörka ytor behöver mer av smoothiefärgen för att pastellen ska synas. */
+  @media (prefers-color-scheme: dark) {
+    :root,
+    .kort,
+    .smoothie {
+      --pastell:      color-mix(in oklab, var(--start) 22%, var(--yta));
+      --pastell-slut: color-mix(in oklab, var(--slut)  22%, var(--yta));
+    }
+  }
+}
+
+
+/* ============================================================================
+   5. BAS
+   ========================================================================== */
+
+body {
+  font: 400 var(--steg-0)/var(--rad-brod) var(--typ-brod);
+  color: var(--blck);
+  background: var(--papper);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4,
+.hero__titel, .smoothie__titel, .kort__namn,
+.recept__rubrik, .galleri__rubrik, .hero__glas-namn, .onskeruta__citat {
+  font-family: var(--typ-rubrik);
+  text-wrap: balance;
+  color: var(--blck);
+}
+
+/* Stora rubriker dras ihop en aning så att orden håller ihop som en klump
+   i stället för att glesna. */
+h1 {
+  font-size: var(--steg-4);
+  font-weight: 800;
+  line-height: var(--rad-rubrik);
+  letter-spacing: var(--sparr-tat);
+  max-inline-size: 24ch;
+}
+h2 {
+  font-size: var(--steg-4);
+  font-weight: 700;
+  line-height: var(--rad-rubrik);
+  letter-spacing: -0.02em;
+}
+h3 {
+  font-size: var(--steg-2);
+  font-weight: 700;
+  line-height: var(--rad-rubrik);
+  letter-spacing: -0.015em;
+}
+
+p, li { text-wrap: pretty; }
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+/* Grundrytmen i löpande innehåll. Selektorerna är avsiktligt typbaserade och
+   ligger inne i :where(main) — specificiteten blir 0,0,2 så att varje
+   komponentregel längre ner vinner utan !important. */
+:where(main)
+  :is(p, ul, ol, dl, div, figure, figcaption, blockquote)
++ :is(p, ul, ol, dl, div, figure, figcaption, blockquote) {
+  margin-block-start: var(--rum-3);
+}
+:where(main) :is(h1, h2, h3) + * { margin-block-start: var(--rum-4); }
+
+/* Länkar i brödtext (ART-DIRECTION §8.3). Färg bär aldrig information ensam
+   — understrykningen gör länken identifierbar även för den som inte skiljer
+   färgerna åt. Piller och knappar räknas inte som brödtext. */
+main :is(p, li, dd, figcaption, blockquote) a:not(.knapp):not(.smak-etikett) {
+  color: var(--blck);
+  text-decoration: underline;
+  text-decoration-color: var(--ram-stark);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color var(--rorelse-snabb) var(--lugn);
+}
+main :is(p, li, dd, figcaption, blockquote) a:not(.knapp):not(.smak-etikett):hover {
+  text-decoration-color: var(--blck);
+}
+
+::selection { background: var(--blck); color: var(--papper); }
+
+
+/* ============================================================================
+   6. HJÄLPARE
+   ========================================================================== */
+
+/* 6.1 Behållare ----------------------------------------------------------- */
+
+.bredd {
+  inline-size: min(100% - var(--kant) * 2, var(--max, 76rem));
+  margin-inline: auto;
+}
+/* Modifierare av .bredd, ingen ny toppnivåklass — smalnar till läsbredd. */
+.bredd--text { --max: 46rem; }
+
+/* 6.2 Dold text ----------------------------------------------------------- */
+
+.visuellt-dold {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 6.3 Skiplänk ------------------------------------------------------------ */
+
+.hopp-till-innehall {
+  position: absolute;
+  inset-block-start: -100%;
+  inset-inline-start: var(--rum-3);
+  z-index: 100;
+  padding: var(--rum-2) var(--rum-4);
+  background: var(--blck);
+  color: var(--papper);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--radie-2) var(--radie-2);
+  box-shadow: var(--lyft-2);
+  transition: inset-block-start var(--rorelse-snabb) var(--lugn);
+}
+.hopp-till-innehall:focus { inset-block-start: 0; }
+
+/* 6.4 Etikett ------------------------------------------------------------- */
+
+.etikett {
+  display: inline-block;
+  font-size: var(--steg--1);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: var(--sparr-etikett);
+  color: var(--dis);
+  margin: 0;
+}
+/* Som egen rad är etiketten en överskrift till det som kommer under: tätt
+   under sig, luft ovanför — men aldrig när den inleder en ruta. */
+p.etikett { margin-block: 0 var(--rum-1); }
+:where(main) * + p.etikett { margin-block-start: var(--rum-5); }
+
+/* 6.5 Knappar ------------------------------------------------------------- */
+
+.knapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rum-1);
+  min-block-size: 2.75rem;            /* 44 px tryckyta */
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radie-rund);
+  background: var(--blck);
+  color: var(--papper);
+  font: 600 var(--steg-0)/1.2 var(--typ-brod);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--lyft-1);
+  transition: transform var(--rorelse-snabb) var(--studs),
+              box-shadow var(--rorelse-snabb) var(--lugn),
+              background-color var(--rorelse-snabb) var(--lugn);
+}
+.knapp:hover  { transform: translateY(-2px); box-shadow: var(--lyft-2); }
+.knapp:active { transform: translateY(0);    box-shadow: var(--lyft-0); }
+
+.knapp--stor {
+  font-size: var(--steg-1);
+  padding: 1rem 2rem;
+  min-block-size: 3.25rem;
+}
+
+.knapp--tyst {
+  background: transparent;
+  color: var(--blck);
+  border-color: var(--ram-stark);
+  box-shadow: none;
+}
+.knapp--tyst:hover { background: var(--yta); box-shadow: var(--lyft-1); }
+
+
+/* ============================================================================
+   7. LAYOUT — omslag, sidhuvud, sidfot
+   ========================================================================== */
+
+/* overflow-x: clip är obligatoriskt: blobbarna sticker ut med flit och
+   horisontell scroll är förbjuden (CONTRACT §9). clip skapar — till skillnad
+   från hidden — ingen rullbehållare, så det klibbiga sidhuvudet fungerar. */
+.omslag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  overflow-x: clip;
+}
+.omslag > main { flex: 1; }
+
+/* 7.1 Sidhuvud ------------------------------------------------------------
+   Lågt, klibbigt och nästan osynligt — innehållet ska äga skärmen. */
+
+.sidhuvud {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 30;
+  background: rgb(var(--slojja) / 0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  border-block-end: 1px solid var(--ram);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .sidhuvud { background: var(--papper); }
+}
+
+.sidhuvud > .bredd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rum-3);
+  min-block-size: 3.5rem;
+}
+
+/* Loggan förkortas aldrig i markup — text får inte försvinna för
+   synhjälpmedel. Den krymper i stället under 26rem (§13). */
+.sidhuvud__logga {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rum-1);
+  min-block-size: 44px;
+  font-family: var(--typ-rubrik);
+  font-size: var(--steg-1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blck);
+  text-decoration: none;
+}
+.sidhuvud__logga span { font-size: 1.15em; line-height: 1; }
+
+/* Tre poster, tre 44 px-mål. Ingen hamburgare behövs ens på 360 px. */
+.sidhuvud__meny {
+  display: flex;
+  gap: var(--rum-0);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidhuvud__meny a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: var(--rum-2);
+  border-radius: var(--radie-1);
+  color: var(--dis);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--rorelse-snabb) var(--lugn),
+              background-color var(--rorelse-snabb) var(--lugn);
+}
+.sidhuvud__meny a:hover { color: var(--blck); background: var(--ram); }
+.sidhuvud__meny a[aria-current="page"] { color: var(--blck); font-weight: 600; }
+
+/* 7.2 Sidfot -------------------------------------------------------------- */
+
+.sidfot {
+  position: relative;
+  isolation: isolate;
+  margin-block-start: var(--sektion);
+  border-block-start: 1px solid var(--ram);
+  padding-block: var(--rum-6) var(--rum-7);
+  color: var(--dis);
+  font-size: var(--steg--1);
+  line-height: 1.75;
+}
+.sidfot > .bredd { display: grid; gap: var(--rum-2); }
+.sidfot p { margin: 0; max-inline-size: var(--matt-brod); }
+.sidfot a {
+  position: relative;
+  color: var(--blck);
+  text-decoration: underline;
+  text-decoration-color: var(--ram-stark);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color var(--rorelse-snabb) var(--lugn);
+}
+/* Länkarna sitter mitt i löpande text. Träffytan växer med ett osynligt
+   ::after i stället för med radhöjden — annars glesnar sidfotens stycken. */
+.sidfot a::after {
+  content: "";
+  position: absolute;
+  inset-block: -0.7em;
+  inset-inline: -0.2em;
+}
+.sidfot a:hover { text-decoration-color: var(--blck); }
+
+
+/* ============================================================================
+   8. HERO, BLOBBHAVET OCH DET RINNANDE STRECKET
+   Signaturgrepp 1 och 3.
+   ========================================================================== */
+
+/* Full bredd, hög luft, ingen bild på mobil — blobbarna och typografin bär
+   heron. Höjden är tilltagen men aldrig 100vh: galleriet ska titta fram. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  gap: var(--rum-4);
+  min-block-size: clamp(24rem, 62vh, 34rem);
+  padding-block: var(--rum-7) var(--rum-8);
+}
+
+.hero__titel {
+  font-size: var(--steg-6);
+  font-weight: 800;
+  line-height: var(--rad-tat);
+  letter-spacing: var(--sparr-tat);
+  max-inline-size: var(--matt-rubrik);
+  margin: 0;
+}
+
+/* Ingressen ligger ovanpå blobbhavet och är därför den enda sekundära texten
+   på sajten som inte får vara --dis. Bakgrunden bakom den är inte --papper
+   utan papper blandat med tre okända smoothiefärger ur datan, och --dis
+   sjunker då under kravet 4,5:1 (CONTRACT §9). Samma regel som ART-DIRECTION
+   §1.4 sätter för pastellytor gäller här: på en yta som bär smoothiefärg
+   används enbart --blck. Storleken och den lägre vikten bär hierarkin i
+   stället för färgen. */
+.hero__ingress {
+  font-size: var(--steg-1);
+  line-height: 1.45;
+  color: var(--blck);
+  max-inline-size: var(--matt-ingress);
+  margin: 0;
+}
+
+/* Startsidans enda primära handling. */
+.hero__knapp { justify-self: start; }
+
+/* 8.1 Blobbhavet (ART-DIRECTION §6.1) -------------------------------------
+   Tre stora mjuka färgmoln som driver långsamt bakom hero-texten. Färgerna
+   kommer från de tre nyaste smoothiernas egna --start/--slut, satta inline
+   av index.php — sajtens bakgrund byter alltså skepnad av sig själv varje
+   gång generatorn kör. Det är greppet som binder ihop data och känsla.
+
+   filter: blur() ligger på behållaren och inte på varje blobb: halva antalet
+   lager för kompositorn. isolation på .hero gör att z-index: -1 stannar
+   bakom texten men framför sidbakgrunden.                                  */
+.hero__blobbar {
+  position: absolute;
+  inset-block-start: -10%;
+  /* Heron ligger i .bredd och är alltså smalare än skärmen på stora fönster.
+     Blobbhavet ska ändå gå ut i kanterna, annars syns en rektangelkant i
+     luften. 50vw räcker alltid ut förbi vyn, och .omslag klipper resten. */
+  inset-inline: calc(-1 * max(20%, 50vw));
+  block-size: 130%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  filter: blur(60px) saturate(1.15);
+  /* Opaciteten är ett kontrastvärde, inte ett smakvärde. Masken är helt
+     ogenomskinlig rakt under hero-texten, så bakgrunden där är
+     opacitet · blobbfärg + resten · --papper. Färgerna kommer ur datan och
+     kan vara vad som helst, så taket räknas mot de yttersta tänkbara: helsvart
+     blobb i ljust läge, helvit i mörkt. Vid 0.40 respektive 0.34 klarar --blck
+     då 5,74:1 och 5,50:1 mot kravet 4,5:1 (CONTRACT §9) — och mot datans
+     faktiska färger ligger det mellan 6 och 17:1. Höjs den här siffran faller
+     hero-texten under kravet. */
+  opacity: 0.40;
+  /* Masken måste hinna bli genomskinlig innanför lådan — annars klipps
+     färgen av rakt av längs underkanten i stället för att tona ut. */
+  -webkit-mask-image: radial-gradient(120% 66% at 50% 34%, #000 38%, transparent 100%);
+          mask-image: radial-gradient(120% 66% at 50% 34%, #000 38%, transparent 100%);
+}
+@media (prefers-color-scheme: dark) {
+  .hero__blobbar { opacity: 0.34; }
+}
+
+.blobb {
+  position: absolute;
+  inline-size: 46vmax;
+  aspect-ratio: 1;
+  border-radius: 46% 54% 38% 62% / 58% 42% 60% 40%;
+  background: radial-gradient(circle at 35% 35%, var(--start), var(--slut) 72%);
+  will-change: transform;
+  animation: driva var(--tid, 64s) var(--mjukt-fram-tillbaka) infinite alternate;
+}
+.blobb:nth-child(1) { inset-block-start: -14%; inset-inline-start: -8%; --tid: 58s; }
+.blobb:nth-child(2) { inset-block-start:  18%; inset-inline-start: 52%; --tid: 71s;
+                      animation-delay: -18s; }
+.blobb:nth-child(3) { inset-block-start:  46%; inset-inline-start: 16%; --tid: 86s;
+                      animation-delay: -37s; inline-size: 34vmax; }
+
+@keyframes driva {
+  from { transform: translate3d(0, 0, 0)      scale(1)    rotate(0deg); }
+  to   { transform: translate3d(6vw, -4vh, 0) scale(1.14) rotate(24deg); }
+}
+
+/* 8.2 Det rinnande strecket (ART-DIRECTION §6.3) --------------------------
+   En bred gradientremsa UNDER rubriken, med background-size: 300 % och en
+   långsam förskjutning som får färgerna att rinna fram och tillbaka som
+   mixerns virvel. Texten ligger aldrig i gradienten, bara ovanför den —
+   därför är kontrasten oförändrad 16,27:1.                                */
+.hero__titel::after,
+.smoothie__titel::after {
+  content: "";
+  display: block;
+  block-size: 0.5rem;
+  inline-size: min(12rem, 42%);
+  margin-block-start: var(--rum-3);
+  border-radius: var(--radie-rund);
+  background: linear-gradient(90deg, var(--start), var(--slut),
+                                     var(--start), var(--slut));
+  background-size: 300% 100%;
+  animation: rinna 14s var(--mjukt-fram-tillbaka) infinite alternate;
+}
+@keyframes rinna {
+  from { background-position:   0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* Samma remsa återkommer på galleriets rubrik som en tyst rim — smalare och
+   utan rörelse. Färgen kommer från det översta kortet i den visade listan. */
+.galleri__rubrik::after {
+  content: "";
+  display: block;
+  block-size: 0.5rem;
+  inline-size: 4rem;
+  margin-block-start: var(--rum-2);
+  border-radius: var(--radie-rund);
+  background: linear-gradient(90deg, var(--start), var(--slut));
+}
+
+/* 8.3 Senaste glaset i heron ----------------------------------------------
+   Sajtens poäng är bilderna, så den nyaste ska synas direkt — men först från
+   64rem. På mobil äger rubriken skärmen, och där hade bilden bara skjutit
+   undan allt annat. Ett polaroidkort på svaj: namnet ligger på --yta, aldrig
+   ovanpå den mättade bilden.                                              */
+
+.hero__glas { display: none; }
+.hero__glas-namn { display: block; }
+
+@media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    /* Raderna mäts av sitt innehåll. Utan detta sträcks rubrikraden ut för
+       att möta bildens höjd, och luften under rubriken blir dubbelt så stor
+       som luften under ingressen. */
+    grid-template-rows: repeat(3, min-content);
+    align-content: center;
+    align-items: center;
+    column-gap: var(--rum-7);
+  }
+  .hero__titel,
+  .hero__ingress,
+  .hero__knapp { grid-column: 1; }
+
+  .hero__glas {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: center;
+    justify-self: end;
+    inline-size: min(100%, 21rem);
+    padding: var(--rum-2);
+    border-radius: var(--radie-4);
+    background: var(--yta);
+    color: var(--blck);
+    text-decoration: none;
+    box-shadow: var(--lyft-3), var(--hairline);
+    rotate: -1.75deg;
+    transition: rotate var(--rorelse-mjuk) var(--studs),
+                transform var(--rorelse-mjuk) var(--studs),
+                box-shadow var(--rorelse-mjuk) var(--lugn);
+  }
+  .hero__glas img {
+    inline-size: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: calc(var(--radie-4) - var(--rum-2));
+    /* Ljusgården: bilden laddar in mot smoothiens egen färg, aldrig mot vitt. */
+    background: linear-gradient(150deg, var(--start), var(--slut));
+  }
+  .hero__glas-namn {
+    padding: var(--rum-3) var(--rum-3) var(--rum-1);
+    font-size: var(--steg-1);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero__glas:hover,
+    .hero__glas:focus-visible {
+      rotate: 0deg;
+      transform: translateY(-4px);
+      box-shadow: var(--lyft-3), 0 22px 48px -22px var(--start), var(--hairline);
+    }
+  }
+}
+
+
+/* ============================================================================
+   9. GALLERI, KORT OCH KORTLYFTET
+   Signaturgrepp 2.
+   ========================================================================== */
+
+/* 9.1 Rutnätet — 1 → 2 → 3 kolumner ---------------------------------------
+   minmax(0, 1fr) i stället för 1fr: annars kan ett långt smoothienamn göra
+   spalten bredare än sin andel och skjuta ut raden. */
+.galleri {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--rum-5) var(--rum-4);
+  padding-block: var(--sektion);
+}
+@media (min-width: 40rem) {
+  .galleri { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 64rem) {
+  .galleri {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--rum-6) var(--rum-5);
+  }
+}
+
+.galleri__rubrik {
+  grid-column: 1 / -1;
+  font-size: var(--steg-4);
+  font-weight: 700;
+  line-height: var(--rad-rubrik);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--rum-1);
+}
+
+/* 9.2 Kortet ---------------------------------------------------------------
+   Ytan är alltid --yta, aldrig gradienten. Smoothiens färg får synas i tre
+   kontrollerade doser: bandet överst, ljusgården bakom bilden och
+   etiketternas pasteller. Ingen text hamnar någonsin på mättad färg.
+
+   Korten sträcker sig till radens höjd via rutnätet, och flexkolumnen inuti
+   låter raden "Önskad av" pinnas i botten så att korten radar upp sig.
+
+   Kortet klipper ingenting. Fokusringen på .kort__lank ligger 8 px utanför
+   länkens kant, och länken fyller kortet ända ut till kanten — all klippning
+   här äter alltså ringen (ART-DIRECTION §8.1). overflow-clip-margin räckte
+   inte som skydd: den stannar exakt på ringens ytterkant, och i en motor som
+   kan overflow: clip men inte overflow-clip-margin faller marginalen bort och
+   hela ringen försvinner. Det som behövde klippas klipper sig självt i
+   stället: bildzoomen av .kort__bildruta, bandet av sin egen rundning.      */
+.kort {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--yta);
+  border: 1px solid var(--ram);
+  border-radius: var(--radie-3);
+  box-shadow: var(--lyft-1), var(--hairline);
+  transition: transform var(--rorelse-mjuk) var(--lugn),
+              box-shadow var(--rorelse-mjuk) var(--lugn),
+              border-color var(--rorelse-mjuk) var(--lugn);
+}
+
+/* Gradientbandet — 6 px smoothie längs kortets överkant. Rutan täcker hela
+   kortet och ärver dess rundning, men bakgrunden målas bara i de översta
+   6 px: så följer bandet hörnkurvan utan att kortet behöver klippa.
+   pointer-events: none är inte kosmetik — utan den lägger sig rutan över
+   .kort__lank::after och kortet slutar vara klickbart.                     */
+.kort::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, var(--start), var(--slut));
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+}
+
+.kort__lank {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: var(--rum-3);
+  padding-block-end: var(--rum-4);
+  color: inherit;
+  text-decoration: none;
+}
+/* Hela kortet blir klickbart utan att markup nästlar länkar i varandra. */
+.kort__lank::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* Fast bildformat: rutan är kvadratisk redan innan bilden laddat, så inget
+   hoppar när den kommer. */
+.kort__bildruta {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radie-3) var(--radie-3) var(--radie-4) var(--radie-4);
+  background: linear-gradient(150deg, var(--start), var(--slut));
+}
+.kort__bild {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform var(--rorelse-lang) var(--lugn);
+}
+.kort__emoji {
+  position: absolute;
+  inset-block-end: var(--rum-2);
+  inset-inline-end: var(--rum-2);
+  font-size: var(--steg-3);
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.35));
+}
+
+.kort__text {
+  display: grid;
+  gap: var(--rum-1);
+  padding-inline: var(--rum-4);
+}
+.kort__namn {
+  font-size: var(--steg-2);
+  font-weight: 700;
+  line-height: var(--rad-rubrik);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.kort__underrubrik {
+  font-size: var(--steg-0);
+  line-height: 1.45;
+  color: var(--dis);
+  margin: 0;
+}
+.kort__profil {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rum-1);
+  list-style: none;
+  margin: var(--rum-1) 0 0;
+  padding: 0;
+}
+
+/* Önskade kort bär en liten stolthet — starkare ram och ett namn sist. Det
+   ska kännas som en present, aldrig som en varning. */
+.kort--onskad { border-color: var(--ram-stark); }
+.kort--onskad .kort__lank { padding-block-end: var(--rum-2); }
+.kort__onskad-av {
+  margin: auto 0 0;              /* pinnas i botten av kortet */
+  padding-inline: var(--rum-4);
+  padding-block: var(--rum-1) var(--rum-4);
+  font-size: var(--steg--1);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--dis);
+}
+
+/* 9.3 Smaketiketten -------------------------------------------------------
+   Samma piller i två roller: som ren märkning (li) i kortet och på
+   smoothiesidan, och som filterlänk (a) i galleriet. Bara länkarna behöver
+   en 44 px tryckyta, och den sätter index.php själv. */
+.smak-etikett {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3em 0.75em;
+  border: 1px solid var(--rand-etikett);
+  border-radius: var(--radie-rund);
+  background: var(--yta);
+  background: var(--pastell);
+  color: var(--blck);
+  font-size: var(--steg--1);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+a.smak-etikett {
+  transition: background-color var(--rorelse-snabb) var(--lugn),
+              border-color var(--rorelse-snabb) var(--lugn),
+              color var(--rorelse-snabb) var(--lugn);
+}
+a.smak-etikett:hover {
+  background: var(--blck);
+  border-color: var(--blck);
+  color: var(--papper);
+}
+
+/* 9.4 Kortlyftet (ART-DIRECTION §6.2) -------------------------------------
+   Kortet lyfter, tiltar en halv grad och tänder en glöd i smoothiens egen
+   färg. Bilden zoomar sakta inuti sin ruta. En halv grad läses som liv, två
+   grader som leksak. pointer: fine gör att inget hoppar till på pekskärm,
+   där :hover fastnar. :focus-within ger tangentbordet exakt samma glädje. */
+@media (hover: hover) and (pointer: fine) {
+  .kort:hover,
+  .kort:focus-within {
+    transform: translateY(-6px) rotate(-0.5deg) scale(1.012);
+    box-shadow: var(--lyft-3), 0 18px 40px -18px var(--start), var(--hairline);
+    border-color: var(--rand-hov);
+  }
+  /* Varannat kort tiltar åt andra hållet — raden får en liten puls. */
+  .kort:nth-child(even):hover,
+  .kort:nth-child(even):focus-within { rotate: 0.5deg; }
+
+  .kort:hover .kort__bild,
+  .kort:focus-within .kort__bild { transform: scale(1.05); }
+
+  .kort:active { transform: translateY(-2px) scale(1.004); }
+}
+
+/* På pekskärm finns ingen hover — men tapet ska ändå kännas. */
+@media (hover: none) {
+  .kort:active  { transform: translateY(2px); }
+  .knapp:active { transform: translateY(1px); }
+}
+
+
+/* ============================================================================
+   10. SMOOTHIESIDAN
+   ========================================================================== */
+
+/* 10.1 Toppen -------------------------------------------------------------
+   Mobilt: bild först, sedan text. Från 64rem ligger bilden kvar till vänster
+   medan receptet rullar förbi. :has() gör att spalten bara delas när det
+   faktiskt finns en bild att lägga i den. */
+.smoothie__topp {
+  display: grid;
+  gap: var(--rum-5);
+  padding-block: var(--rum-6) var(--rum-7);
+}
+.smoothie__bild {
+  inline-size: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radie-4);
+  box-shadow: var(--lyft-3);
+  background: linear-gradient(150deg, var(--start), var(--slut));
+}
+@media (min-width: 64rem) {
+  .smoothie__topp:has(.smoothie__bild) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--rum-7);
+    align-items: start;
+  }
+  .smoothie__bild { position: sticky; inset-block-start: var(--rum-5); }
+}
+
+.smoothie__titel {
+  font-size: var(--steg-5);
+  font-weight: 800;
+  line-height: var(--rad-tat);
+  letter-spacing: var(--sparr-tat);
+  max-inline-size: var(--matt-rubrik);
+  margin: 0 0 var(--rum-2);
+}
+.smoothie__underrubrik {
+  font-size: var(--steg-1);
+  line-height: 1.45;
+  color: var(--dis);
+  max-inline-size: var(--matt-ingress);
+  margin: 0 0 var(--rum-4);
+}
+.smoothie__beskrivning {
+  max-inline-size: var(--matt-brod);
+  font-size: var(--steg-1);
+  line-height: 1.55;
+}
+
+/* 10.2 Meta — bara tillåtna siffror: portioner, minuter, datum ------------ */
+
+.smoothie__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--rum-1) var(--rum-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--rum-4) 0 0;
+}
+.meta-post {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45em 0.85em;
+  border-radius: var(--radie-rund);
+  background: var(--yta);
+  background: var(--pastell);
+  color: var(--blck);
+  font-size: var(--steg--1);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: var(--sparr-etikett);
+}
+/* Piller och märkning står sida vid sida i metaraden — samma höjd. */
+.smoothie__meta > .smak-etikett,
+.smoothie__meta > .meta-post { min-block-size: 2rem; }
+
+/* 10.3 Önskerutan — visas bara när smoothien kom ur ett mail -------------- */
+
+.onskeruta {
+  margin-block: var(--rum-5);
+  padding: var(--rum-5);
+  max-inline-size: var(--matt-brod);
+  border: 1px solid var(--rand-ruta);
+  border-radius: var(--radie-3);
+  background: var(--yta);
+  background: var(--pastell);
+  color: var(--blck);
+}
+.onskeruta__citat {
+  font-size: var(--steg-2);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--rum-2);
+  text-wrap: balance;
+}
+.onskeruta__citat::before { content: "\201D"; }
+.onskeruta__citat::after  { content: "\201D"; }
+/* På pastell används enbart --blck, aldrig --dis (ART-DIRECTION §1.4). */
+.onskeruta figcaption,
+.onskeruta > p { color: var(--blck); font-size: var(--steg-0); }
+.onskeruta figcaption p { margin: 0; }
+.onskeruta > p:last-child { margin-block-end: 0; }
+
+/* 10.4 Receptet — en spalt mobilt, två från 52rem ------------------------- */
+
+.recept {
+  display: grid;
+  gap: var(--rum-5);
+  padding-block: var(--sektion);
+  border-block-start: 1px solid var(--ram);
+}
+@media (min-width: 52rem) {
+  .recept {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    gap: var(--rum-7);
+    align-items: start;
+  }
+}
+.recept__kolumn {
+  background: var(--yta);
+  border: 1px solid var(--ram);
+  border-radius: var(--radie-3);
+  padding: var(--rum-5);
+  box-shadow: var(--lyft-1), var(--hairline);
+}
+.recept__rubrik {
+  font-size: var(--steg-2);
+  font-weight: 700;
+  line-height: var(--rad-rubrik);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--rum-3);
+}
+.recept__rubrik + * { margin-block-start: 0; }
+/* Mellanrubriken "Toppa med" behöver luft ovanför sig. */
+.recept__kolumn > * + .recept__rubrik { margin-block-start: var(--rum-5); }
+
+/* Ingredienser. Mängdkolumnen är 5.5rem — rymmer "1 ½ msk" utan brytning. */
+.ingredienslista { list-style: none; margin: 0; padding: 0; }
+.ingrediens {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: var(--rum-2);
+  padding-block: var(--rum-2);
+  border-block-end: 1px dashed var(--ram);
+}
+.ingrediens:first-child { padding-block-start: 0; }
+.ingrediens:last-child  { border-block-end: 0; padding-block-end: 0; }
+.ingrediens__mangd {
+  font-family: var(--typ-siffra);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--steg-0);
+  font-weight: 500;
+  line-height: var(--rad-brod);
+  color: var(--dis);
+}
+/* Varan står alltid i andra spalten, även när mängden utelämnats. */
+.ingrediens__vara { grid-column: 2; font-weight: 500; }
+.ingrediens__not {
+  grid-column: 2;
+  font-size: var(--steg--1);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--dis);
+}
+
+/* Gör så här. Siffran är ett ::before, så numreringen finns kvar även om
+   listan inte får vara en <ol> i ett visst sammanhang. */
+.stegslista {
+  list-style: none;
+  counter-reset: steg;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--rum-3);
+}
+/* Siffran ligger absolut, inte som en rutnätscell. Ett steg kan innehålla
+   både text och inline-element, och ett rutnät hade då styckat innehållet i
+   flera celler och kastat in halva meningen i sifferkolumnen. */
+.steg {
+  counter-increment: steg;
+  position: relative;
+  min-block-size: 2.25rem;
+  padding-inline-start: calc(2.25rem + var(--rum-3));
+}
+.steg::before {
+  content: counter(steg);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rand-steg);
+  border-radius: var(--radie-rund);
+  background: var(--yta);
+  background: var(--pastell);
+  color: var(--blck);
+  font-family: var(--typ-rubrik);
+  font-weight: 700;
+  font-size: var(--steg--1);
+}
+
+/* Toppa med */
+.toppning {
+  list-style: none;
+  margin: var(--rum-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rum-1);
+}
+.toppning li {
+  font-size: var(--steg-0);
+  line-height: 1.3;
+  padding: 0.35em 0.8em;
+  border: 1px solid var(--ram-stark);
+  border-radius: var(--radie-rund);
+}
+
+/* Knep */
+.knep {
+  margin-block: var(--rum-4) 0;
+  padding: var(--rum-4);
+  border: 1px solid var(--ram);
+  border-radius: var(--radie-2);
+  background: var(--yta);
+  background: var(--pastell-slut);
+  color: var(--blck);
+  font-size: var(--steg-0);
+}
+.knep::before {
+  content: "Knep";
+  display: block;
+  margin-block-end: var(--rum-0);
+  font-size: var(--steg--1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--sparr-etikett);
+  color: var(--blck);
+  opacity: 0.75;
+}
+
+/* 10.5 Grannar ------------------------------------------------------------ */
+
+.granne {
+  display: grid;
+  gap: var(--rum-3);
+  padding-block: var(--sektion) 0;
+  border-block-start: 1px solid var(--ram);
+}
+@media (min-width: 40rem) {
+  .granne { grid-template-columns: 1fr 1fr; }
+}
+.granne a {
+  display: grid;
+  gap: var(--rum-0);
+  align-content: center;
+  min-block-size: 44px;
+  padding: var(--rum-4);
+  border: 1px solid var(--ram);
+  border-radius: var(--radie-2);
+  background: var(--yta);
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--typ-rubrik);
+  font-weight: 700;
+  font-size: var(--steg-1);
+  letter-spacing: -0.01em;
+  transition: border-color var(--rorelse-snabb) var(--lugn),
+              box-shadow var(--rorelse-snabb) var(--lugn);
+}
+.granne a:last-child { text-align: end; }
+.granne a:hover { border-color: var(--ram-stark); box-shadow: var(--lyft-1); }
+.granne .etikett { font-family: var(--typ-brod); }
+
+
+/* ============================================================================
+   11. ÖNSKESIDAN, INNEHÅLLSSIDOR OCH PRICKKONFETTIN
+   Signaturgrepp 4.
+   ========================================================================== */
+
+.onska {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--sektion);
+}
+.onska > * { max-inline-size: var(--matt-brod); }
+
+/* Uppmaningen sist på en smoothiesida får en avdelare, precis som receptet. */
+.smoothie > .onska { border-block-start: 1px solid var(--ram); }
+.onska > .knapp { margin-block-start: var(--rum-5); }
+
+.onska__steg {
+  list-style: none;
+  counter-reset: onskesteg;
+  margin: var(--rum-5) 0;
+  padding: 0;
+  display: grid;
+  gap: var(--rum-4);
+}
+/* Samma sak här: stegen innehåller både löpande text och en mailtolänk, så
+   siffran ligger absolut och texten får en indragning i stället. */
+.onska__steg > li {
+  counter-increment: onskesteg;
+  position: relative;
+  min-block-size: 2.75rem;
+  padding-inline-start: calc(2.75rem + var(--rum-3));
+  padding-block-start: 0.4rem;
+}
+.onska__steg > li::before {
+  content: counter(onskesteg);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radie-rund);
+  background: var(--blck);
+  color: var(--papper);
+  font-family: var(--typ-rubrik);
+  font-weight: 700;
+}
+
+.onska__mailknapp { margin-block: var(--rum-5); }
+
+.onska__exempel {
+  margin-block: var(--rum-5);
+  padding: var(--rum-5);
+  border: 1px dashed var(--ram-stark);
+  border-radius: var(--radie-3);
+  background: var(--yta);
+  font-style: italic;
+  box-shadow: var(--hairline);
+}
+.onska__exempel .etikett { font-style: normal; }
+
+/* 11.1 Prickkonfettin (ART-DIRECTION §6.4) --------------------------------
+   Ett glest prickraster i bläckfärg, maskat så att det tonar bort uppåt. Ger
+   papperskänsla utan en enda bildfil. Aldrig mer än några procent bakom
+   brödtext. */
+.sidfot::before,
+.onska::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center,
+                    var(--prick, currentColor) 1.5px, transparent 1.6px);
+  background-size: 22px 22px;
+  opacity: 0.10;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 60%);
+          mask-image: linear-gradient(180deg, transparent, #000 60%);
+}
+@supports (color: color-mix(in oklab, #000 55%, transparent)) {
+  .sidfot::before,
+  .onska::before { --prick: color-mix(in oklab, var(--blck) 55%, transparent); }
+}
+@media (prefers-color-scheme: dark) {
+  .sidfot::before,
+  .onska::before { opacity: 0.14; }
+}
+
+
+/* ============================================================================
+   12. FOKUS OCH TANGENTBORD
+   En enda markering i hela sajten, i bläckfärg, med en ljus ytterring så att
+   den syns även ovanpå en mättad bildruta. Kontrast ring mot bakgrund:
+   16,27:1 i ljust läge, 17,03:1 i mörkt. Ringen är alltid minst 3 px och
+   alltid utanför elementet — aldrig en inåtgående glöd.
+   ========================================================================== */
+
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--blck);
+  outline-offset: 3px;
+  border-radius: var(--radie-1);
+  box-shadow: 0 0 0 6px var(--papper);
+  transition: outline-offset var(--rorelse-snabb) var(--lugn);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* Ringen ska följa formen på det den ringar in. */
+.kort__lank:focus-visible { outline-offset: 5px; border-radius: var(--radie-3); }
+.knapp:focus-visible,
+.smak-etikett:focus-visible     { border-radius: var(--radie-rund); }
+.granne a:focus-visible         { border-radius: var(--radie-2); }
+.hero__glas:focus-visible       { border-radius: var(--radie-4); }
+.sidhuvud__logga:focus-visible  { border-radius: var(--radie-1); }
+.sidhuvud__meny a:focus-visible { outline-offset: 2px; }
+.hopp-till-innehall:focus-visible {
+  border-radius: 0 0 var(--radie-2) var(--radie-2);
+  box-shadow: var(--lyft-2);
+}
+
+
+/* ============================================================================
+   13. SMÅ SKÄRMAR
+   ========================================================================== */
+
+/* Långa ord får aldrig spränga en smal skärm. */
+.hero__titel,
+.smoothie__titel,
+.kort__namn,
+.hero__glas-namn,
+.onskeruta__citat {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Under 30 rem (480 px) lägger sig mängden ovanför varan. */
+@media (max-width: 30rem) {
+  .ingrediens { grid-template-columns: 1fr; gap: var(--rum-0); }
+  .ingrediens__vara,
+  .ingrediens__not { grid-column: 1; }
+  .recept__kolumn  { padding: var(--rum-4); }
+  .smoothie__meta  { gap: var(--rum-1); }
+  .onskeruta       { padding: var(--rum-4); }
+  .onska__exempel  { padding: var(--rum-4); }
+}
+
+/* Under 26 rem krymper loggan hellre än förkortas. Text får aldrig försvinna
+   för synhjälpmedel. */
+@media (max-width: 26rem) {
+  .sidhuvud__logga  { font-size: var(--steg-0); }
+  .sidhuvud__meny a { padding-inline: var(--rum-1); }
+  .knapp--stor      { padding-inline: var(--rum-4); }
+}
+
+
+/* ============================================================================
+   14. UTSKRIFT
+   Receptet ska kunna skrivas ut och tejpas på kylskåpet.
+   ========================================================================== */
+
+@media print {
+  .sidhuvud,
+  .sidfot,
+  .granne,
+  .hero__blobbar,
+  .hero__glas,
+  .hopp-till-innehall,
+  .onska__exempel,
+  .smoothie .onska { display: none; }
+
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .omslag { min-block-size: 0; }
+  .bredd  { inline-size: 100%; }
+
+  .kort,
+  .recept__kolumn {
+    box-shadow: none;
+    border: 1px solid #999;
+    break-inside: avoid;
+  }
+  .recept { grid-template-columns: 1fr 1fr; gap: 1.5rem; padding-block: 1rem; }
+  .smoothie__topp { grid-template-columns: 1fr; padding-block: 0 1rem; }
+  .smoothie__bild { max-inline-size: 8cm; box-shadow: none; }
+  .steg, .ingrediens { break-inside: avoid; }
+
+  .hero__titel::after,
+  .smoothie__titel::after,
+  .galleri__rubrik::after { display: none; }
+
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+}
+
+
+/* ============================================================================
+   15. RÖRELSEAVSTÄNGNING — absolut sist
+   Hovertillstånden försvinner inte, de blir stilla: kortet behåller sin glöd
+   och sin starkare ram, knappen sin djupare skugga. Återkopplingen finns
+   kvar, rörelsen inte.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html { scroll-behavior: auto !important; }
+
+  /* Blobbarna står stilla i sitt utgångsläge. */
+  .blobb {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .hero__titel::after,
+  .smoothie__titel::after {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+
+  .kort:hover,
+  .kort:focus-within,
+  .kort:active,
+  .kort:nth-child(even):hover,
+  .kort:nth-child(even):focus-within {
+    transform: none !important;
+    rotate: 0 !important;
+  }
+  .kort:hover .kort__bild,
+  .kort:focus-within .kort__bild { transform: none !important; }
+
+  .knapp:hover,
+  .knapp:active { transform: none !important; }
+
+  .hero__glas,
+  .hero__glas:hover,
+  .hero__glas:focus-visible {
+    rotate: 0 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hanterade": [
+    {
+      "uid": "10417",
+      "avsandare_hash": "fc656d6f8147b989096ed1092c9894cb9b71d9395eab7a4cbf943bf76a67874e",
+      "fornamn": "Elin",
+      "mottaget": "2026-07-19T07:41:00+02:00",
+      "smoothie_id": "skymning-over-myren",
+      "status": "publicerad"
+    },
+    {
+      "uid": "10366",
+      "avsandare_hash": "dbf9a570dffdc0bd67a5f60f6642e73e06d0aa075fbcab8136f76bfd78cd0cef",
+      "fornamn": "Johan",
+      "mottaget": "2026-07-11T13:08:00+02:00",
+      "smoothie_id": "lagunens-tysta-timme",
+      "status": "publicerad"
+    },
+    {
+      "uid": "10229",
+      "avsandare_hash": "f333efbef748b19c139e27e8394c98ddbc9e535f05c4849d11d2bce83965a88a",
+      "fornamn": "Birgitta",
+      "mottaget": "2026-06-26T19:52:00+02:00",
+      "smoothie_id": "mossljus-i-maj",
+      "status": "publicerad"
+    }
+  ]
+}

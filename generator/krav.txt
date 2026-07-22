@@ -1,0 +1,16 @@
+# Pythonberoenden för generatorn.
+#     python3 -m pip install -r generator/krav.txt
+#
+# Resten av generatorn är ren standardbibliotekskod: imaplib och smtplib för
+# mailet, json, hashlib, pathlib, logging, subprocess och tempfile för övrigt.
+#
+# Utanför pip krävs också cwebp, som bild.py använder för att beskära och spara
+# bilderna:  brew install webp
+
+# Klienten som recept.py talar med OpenRouter genom.
+openai>=1.40
+
+# Valfri. Finns paramiko laddar publicera.ladda_upp() upp sajten direkt över
+# SFTP. Saknas den används kommandoradens sftp istället, och då krävs antingen
+# en ssh-nyckel hos one.com eller sshpass för lösenordsinloggning.
+paramiko>=3.4
