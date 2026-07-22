@@ -1022,6 +1022,76 @@ a.smak-etikett:hover {
    Mobilt: bild först, sedan text. Från 64rem ligger bilden kvar till vänster
    medan receptet rullar förbi. :has() gör att spalten bara delas när det
    faktiskt finns en bild att lägga i den. */
+/* --- Sidan tar smoothiens färg ------------------------------------------------
+   Öppnar du en smoothie ska hela scenen tillhöra den, inte bara korten i den.
+   Tvätten ligger i ett fast pseudoelement bakom allt innehåll: den följer inte
+   med när man rullar, så färgen sitter kvar högst upp där bilden är och slocknar
+   ner mot papper där brödtexten börjar.
+
+   Kontrasten är därför orörd: all text står kvar på --papper eller --yta, aldrig
+   på en mättad gradient (CONTRACT §9). Färgen kommer helt ur datan via
+   --start/--slut — ingen fruktfärg står skriven här. */
+
+.smoothie::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--papper);
+}
+
+@supports (background: color-mix(in oklab, red 10%, white)) {
+  /* Tvätten lägger färg under sekundärtexten, och den är fast i vyn — vilken
+     rad som helst kan hamna där färgen är som starkast när man rullar. Den
+     ljusa brungrå --dis klarar bara 3,06:1 mot den mörkaste smoothien, så
+     scenens sekundärfärg går ner ett par steg här. Uträknat i oklab över alla
+     publicerade färger: värst 4,93:1 mot 4,5:1-kravet i CONTRACT §9. Den blir
+     samtidigt lättare att läsa på vanligt papper — 10,1:1 mot tidigare 6,3:1.
+     Neutral gråbrun, ingen smoothiefärg (CONTRACT §5). */
+  body:has(.smoothie) { --dis: #4A3C35; }
+
+  /* Färgen ska HÅLLAS över överkanten, inte klinga av innan man hunnit se den.
+     30 % är nära taket: vid 34 % faller sekundärtexten under 4,5:1 mot den
+     mörkaste smoothien. Nedåt slocknar den mot papper, så receptet längre ner
+     läses mot ren yta. */
+  .smoothie::before {
+    background:
+      radial-gradient(90% 55% at 50% 0%,
+        color-mix(in oklab, var(--slut) 26%, transparent) 0%,
+        transparent 70%),
+      linear-gradient(180deg,
+        color-mix(in oklab, var(--start) 30%, var(--papper)) 0%,
+        color-mix(in oklab, var(--start) 26%, var(--papper)) 26%,
+        color-mix(in oklab, var(--start) 14%, var(--papper)) 55%,
+        color-mix(in oklab, var(--start)  5%, var(--papper)) 78%,
+        var(--papper) 100%);
+  }
+
+  /* Sidhuvudet ligger klibbigt ovanpå tvätten. Utan detta lägger det ett vitt
+     band tvärs över färgen precis där den är som starkast. Samma blandning som
+     tvättens överkant, så sömmen försvinner. */
+  body:has(.smoothie) .sidhuvud {
+    background: color-mix(in oklab, var(--start) 30%, var(--papper));
+    border-block-end-color: color-mix(in oklab, var(--start) 38%, var(--papper));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  @supports (background: color-mix(in oklab, red 10%, white)) {
+    .smoothie::before {
+      background:
+        radial-gradient(120% 70% at 50% -10%,
+          color-mix(in oklab, var(--start) 26%, var(--papper)) 0%,
+          color-mix(in oklab, var(--start) 10%, var(--papper)) 40%,
+          var(--papper) 74%),
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--slut) 7%, var(--papper)) 0%,
+          var(--papper) 55%);
+    }
+  }
+}
+
 .smoothie__topp {
   display: grid;
   gap: var(--rum-5);

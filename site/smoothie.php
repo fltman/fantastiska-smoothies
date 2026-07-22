@@ -59,6 +59,11 @@ $sidbild = $smoothie['bild'];
 $sidbild_alt = $smoothie['bild_alt'];
 $aktiv_sida = 'index';
 
+/* Smoothiens färger sätts på <body> så att både sidtvätten och sidhuvudet
+   har --start/--slut att blanda med. Artikeln sätter dem igen för sina egna
+   ytor — samma värden, ingen konflikt. */
+$sidgradient = gradient_stil($smoothie);
+
 require __DIR__ . '/inc/header.php';
 ?>
 

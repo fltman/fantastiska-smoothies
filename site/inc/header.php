@@ -165,7 +165,7 @@ $huvud_favikon = 'data:image/svg+xml,' . rawurlencode($huvud_favikon_svg);
 
 <link rel="stylesheet" href="<?= h(tillgang_url('/assets/css/style.css')) ?>">
 </head>
-<body>
+<body<?= isset($sidgradient) && $sidgradient !== '' ? ' ' . $sidgradient : '' ?>>
 <div class="omslag">
 
 <a class="hopp-till-innehall" href="#innehall">Hoppa till innehållet</a>

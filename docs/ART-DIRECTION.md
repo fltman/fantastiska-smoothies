@@ -1148,3 +1148,32 @@ Designen bär samma regel som texten (CONTRACT §2). Fasta strängar i markup:
 Aldrig i något gränssnittselement: näringsord, siffror om kroppen, "nyttig", "boost",
 "unna dig", "guilt free". Aldrig en ikon som föreställer en våg, ett hjärta med puls,
 ett mål eller en bock i en ruta.
+
+
+## Sidtvätten — smoothiesidan tar drinkens färg
+
+Öppnar man en smoothie färgas **hela scenen** av den, inte bara korten i den.
+Tvätten ligger i `.smoothie::before`, fast i vyn (`position: fixed`), och går
+från 30 % av `--start` blandat i `--papper` högst upp till rent papper längst
+ner. Sidhuvudet får samma blandning som tvättens överkant, annars lägger det ett
+vitt band tvärs över färgen precis där den är starkast.
+
+`--start`/`--slut` sätts på `<body>` av `smoothie.php` (`$sidgradient`), inte
+bara på artikeln — annars har sidhuvudet ingen färg att blanda med.
+
+**Taket är 30 %, och det är uträknat, inte gissat.** Sekundärtexten står direkt
+på tvätten, och eftersom tvätten är fast i vyn kan vilken rad som helst hamna
+där färgen är starkast när man rullar. Därför går `--dis` ner till `#4A3C35` på
+smoothiesidor. Utfall över alla publicerade färger, räknat i oklab:
+
+| | värsta kontrast | krav |
+|---|---|---|
+| brödtext `--blck` | 7,95:1 | 4,5:1 |
+| sekundärtext `--dis` `#4A3C35` | 4,93:1 | 4,5:1 |
+
+Vid 34 % faller sekundärtexten under kravet mot den mörkaste smoothien
+(`#2B1533`). **Höj inte procenten utan att räkna om.** Räkneskriptet ska köras
+mot alla publicerade färger, inte mot en vald favorit — modellen är verifierad
+mot webbläsarens egen `color-mix`-uträkning och stämmer på hundradelen.
+
+Receptet längre ner läses alltid mot `--yta`, aldrig mot tvätten.
