@@ -556,8 +556,14 @@ def hantera_onskemal(post: dict, onskemalslogg: dict, torr: bool) -> dict | None
     logg.info("Önskemål från %s, %d tecken efter rensning.", spar, len(text))
 
     if not sparrar.inom_kvot(hash_, onskemalslogg):
-        logg.info("%s: över dygnskvoten.", spar)
-        svara(post, "Om ditt smoothieönskemål", brev_kvot(fornamn), torr, spar)
+        # Ett svar per avsändare och dygn, inte ett per brev. From-huvudet är
+        # oautentiserat, så den som förfalskar det pekar våra svar mot någon
+        # annan — brevlådan får inte gå att använda som reflektor.
+        if _poster_senaste_dygnet(onskemalslogg, "kvot", hash_):
+            logg.info("%s: över dygnskvoten, har redan fått besked — tiger.", spar)
+        else:
+            logg.info("%s: över dygnskvoten.", spar)
+            svara(post, AMNE_KVOT, brev_kvot(fornamn), torr, spar)
         anteckna(onskemalslogg, post, hash_, fornamn, None, "kvot", torr)
         markera(post, torr, spar)
         return None
@@ -565,7 +571,7 @@ def hantera_onskemal(post: dict, onskemalslogg: dict, torr: bool) -> dict | None
     duger, skal = (False, "tomt mail") if not text else sparrar.ar_rimligt_onskemal(text)
     if not duger:
         logg.info("%s: avvisat (%s).", spar, skal)
-        svara(post, "Om ditt smoothieönskemål", brev_avvisat(fornamn), torr, spar)
+        svara(post, AMNE_TACK, brev_avvisat(fornamn), torr, spar)
         anteckna(onskemalslogg, post, hash_, fornamn, None, "avvisad", torr)
         markera(post, torr, spar)
         return None
@@ -573,7 +579,7 @@ def hantera_onskemal(post: dict, onskemalslogg: dict, torr: bool) -> dict | None
     smoothie = brygg(text, fornamn, _citat_ur(text))
     if smoothie is None:
         logg.error("%s: kunde inte brygga något som klarade granskningen.", spar)
-        svara(post, "Om ditt smoothieönskemål", brev_misslyckat(fornamn), torr, spar)
+        svara(post, AMNE_TACK, brev_misslyckat(fornamn), torr, spar)
         anteckna(onskemalslogg, post, hash_, fornamn, None, "fel", torr)
         markera(post, torr, spar)
         return None
@@ -622,8 +628,32 @@ def tolka_argument(argv: list[str] | None = None) -> argparse.Namespace:
                       help="hoppa över brevlådan och brygg husets egen på en gång, "
                            "utan att vänta in dygnet")
     tolk.add_argument("--antal", type=int, default=None, metavar="N",
-                      help="brygg högst N smoothies den här körningen")
+                      help=f"brygg högst N smoothies den här körningen — sänker "
+                           f"taket, höjer det aldrig (högst {MAX_NYA_PER_KORNING} "
+                           f"per körning och {MAX_NYA_PER_DYGN} per dygn)")
     return tolk.parse_args(argv)
+
+
+def tak_for_korningen(args: argparse.Namespace, onskemalslogg: dict) -> tuple[int, str]:
+    """Hur många önskemål körningen får brygga. Andra värdet är skälet, för loggen.
+
+    Taken gäller oavsett --antal. En bryggd smoothie kostar riktiga pengar och
+    brevlådan är öppen: dygnskvoten i sparrar.py räknas per avsändaradress, och
+    den adressen väljer avsändaren själv. Utan ett tak här räcker det med ett
+    knippe adresser för att fylla varje körning, dygnet runt.
+    """
+    redan = _poster_senaste_dygnet(onskemalslogg, "publicerad")
+    kvar_i_dygnet = MAX_NYA_PER_DYGN - redan
+    if kvar_i_dygnet <= 0:
+        return 0, (f"dygnets tak på {MAX_NYA_PER_DYGN} är nått "
+                   f"({redan} bryggda det senaste dygnet)")
+    tak = min(MAX_NYA_PER_KORNING, kvar_i_dygnet)
+    skal = f"högst {MAX_NYA_PER_KORNING} per körning"
+    if kvar_i_dygnet < MAX_NYA_PER_KORNING:
+        skal = f"{kvar_i_dygnet} kvar av dygnets {MAX_NYA_PER_DYGN}"
+    if args.antal is not None and args.antal < tak:
+        tak, skal = args.antal, f"--antal {args.antal}"
+    return tak, skal
 
 
 def _brygg_husets_nu(args: argparse.Namespace) -> tuple[list[dict], bool]:
@@ -673,9 +703,14 @@ def main(argv: list[str] | None = None) -> int:
 
     if onskemal:
         onskemalslogg = publicera.las_onskemalslogg()
-        for post in onskemal:
-            if args.antal is not None and len(publicerade) >= args.antal:
-                logg.info("Taket på %d är nått — resten väntar till nästa körning.", args.antal)
+        tak, skal = tak_for_korningen(args, onskemalslogg)
+        # Breven som inte får plats lämnas olästa och tas om nästa timme —
+        # hellre det än att brygga upp hela dygnets budget på en körning.
+        if tak <= 0:
+            logg.info("Brygger inget den här körningen: %s. Breven ligger kvar.", skal)
+        for post in onskemal if tak > 0 else []:
+            if len(publicerade) >= tak:
+                logg.info("Taket är nått (%s) — resten väntar till nästa körning.", skal)
                 break
             try:
                 smoothie = hantera_onskemal(post, onskemalslogg, args.torr)

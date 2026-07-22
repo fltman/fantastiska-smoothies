@@ -161,7 +161,7 @@ $huvud_favikon = 'data:image/svg+xml,' . rawurlencode($huvud_favikon_svg);
 <meta name="twitter:card" content="summary">
 <?php endif; ?>
 
-<link rel="stylesheet" href="<?= h(bas('/assets/css/style.css')) ?>">
+<link rel="stylesheet" href="<?= h(tillgang_url('/assets/css/style.css')) ?>">
 </head>
 <body>
 <div class="omslag">

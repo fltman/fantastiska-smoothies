@@ -59,6 +59,6 @@ $sidfot_antalstext = match (true) {
 </footer>
 
 </div>
-<script src="<?= h(bas('/assets/js/app.js')) ?>" defer></script>
+<script src="<?= h(tillgang_url('/assets/js/app.js')) ?>" defer></script>
 </body>
 </html>

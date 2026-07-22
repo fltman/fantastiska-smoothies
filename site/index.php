@@ -11,8 +11,8 @@ declare(strict_types=1);
  * dokumentet.
  *
  * Klassnamnen är exakt de i CONTRACT §5. De få inline-stilarna här sätter
- * bara neutrala scentokens och rutnätsspann — aldrig en smoothiefärg. All
- * färg som betyder något kommer från datan via gradient_stil().
+ * rutnätsspann, tryckytor och neutrala scentokens — aldrig en smoothiefärg.
+ * All färg som betyder något kommer från datan via gradient_stil().
  */
 
 require_once __DIR__ . '/inc/functions.php';
@@ -93,17 +93,24 @@ if ($vald_smak !== '' && !in_array($vald_smak, $filterorden, true)) {
     array_unshift($filterorden, $vald_smak);
 }
 
-/* Filterraden ligger utanför ett .kort, och där finns varken --pastell eller
-   --rand-etikett. Vi ger pillren scenens egna neutraler i stället — samma
-   reservvärden som CSS deklarerar, aldrig en fruktfärg. */
-$filterrad = 'display:flex;flex-wrap:wrap;gap:var(--rum-1);list-style:none;'
-    . 'margin:0;padding:0;--pastell:var(--yta);--rand-etikett:var(--ram-stark)';
+/* Formen på pillren kommer från a.smak-etikett i style.css. Kvar här står bara
+   det som stilmallen inte känner till, och varje rad har sitt skäl:
 
-/* Ett piller är en knapp, inte en mening: ingen understrykning, och 2,75rem
-   högt så att tryckytan når 44 px (ART-DIRECTION §8.2). Det valda är fyllt i
-   bläck — 16,27:1 mot papper, den uträknade kontrasten i §1.3. */
-$piller = 'display:inline-flex;align-items:center;min-block-size:2.75rem;'
-    . 'padding-inline:1rem;text-decoration:none';
+   - Radens flex och punktfria lista: <ul> har ingen klass, så resetens
+     ul[class]-regel når den inte.
+   - --rand-etikett: utanför ett .kort gäller :root-reserven, och den är nästan
+     osynlig. Filterlänkarna är kontroller och ska ha en rand som klarar 3:1.
+     Det är scenens egen neutral, aldrig en fruktfärg (ART-DIRECTION §1.4).
+   - Måtten på pillret: 2,75rem högt och 1rem in på sidorna ger 44 px tryckyta
+     (ART-DIRECTION §8.2). style.css lämnar dem med flit till den här filen.
+   - Det valda pillret: fyllt i bläck, 16,27:1 mot papper (§1.3). Stilmallen har
+     ingen regel för aria-current på en smak-etikett.
+
+   Allt detta hör egentligen hemma i style.css — den filen ägs av någon annan. */
+$filterrad = 'display:flex;flex-wrap:wrap;gap:var(--rum-1);list-style:none;'
+    . 'padding:0;--rand-etikett:var(--ram-stark)';
+
+$piller = 'min-block-size:2.75rem;padding-inline:1rem';
 $piller_valt = $piller . ';background:var(--blck);color:var(--papper);border-color:var(--blck)';
 
 $antal_visade = count($visade);
@@ -138,20 +145,26 @@ require __DIR__ . '/inc/header.php';
 <?php endif; ?>
 
   <h1 class="hero__titel"><?= h(SAJT_NAMN) ?></h1>
-  <p class="hero__ingress">Kalla, tjocka glas i solmogna färger — mango och passionsfrukt,
-    blåbär med kardemumma, kokos och lime. Nya recept dyker upp här av sig själva, och
-    du kan be om ett alldeles eget.</p>
+  <!-- Kort med flit: fem rader ingress vid 360 px sköt ner galleriet under andra
+       skärmen. Inbjudan att önska står i knappen nedanför och behöver inte sägas
+       två gånger. -->
+  <p class="hero__ingress">Kalla, tjocka glas i solmogna färger — mango, blåbär, kokos.
+    Nya recept dyker upp här av sig själva.</p>
   <a class="knapp knapp--stor hero__knapp" href="<?= h(bas('/onska')) ?>">Önska en egen smoothie</a>
 
 <?php
-/* Senaste glaset står bredvid rubriken från 64rem och är dolt under det —
-   därför lat inladdning, så att mobilen aldrig hämtar en bild den inte visar. */
+/* Senaste glaset står bredvid rubriken från 64rem och är display:none under
+   det. En <img> hämtas annars oavsett om den ritas ut, så lat inladdning står
+   kvar: den väntar på att elementet ska närma sig vyn, och ett element utan
+   layoutruta gör aldrig det. Mobilen hämtar alltså aldrig bilden.
+   Från 64rem är den däremot sidans största bild och rimligen det som mäts som
+   LCP — därför hög hämtningsprioritet så snart den väl efterfrågas. */
 if ($smoothies !== [] && bild_url($smoothies[0]) !== ''):
     $senaste = $smoothies[0];
 ?>
   <a class="hero__glas" href="<?= h(url_for($senaste['id'])) ?>" <?= gradient_stil($senaste) ?>>
     <img src="<?= h(bild_url($senaste)) ?>" alt="<?= h($senaste['bild_alt']) ?>"
-         width="1024" height="1024" loading="lazy" decoding="async">
+         width="1024" height="1024" loading="lazy" fetchpriority="high" decoding="async">
     <span class="hero__glas-namn"><?= h($senaste['namn']) ?></span>
   </a>
 <?php endif; ?>

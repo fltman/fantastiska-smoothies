@@ -152,7 +152,7 @@
     /* Exakt samma rubrik som index.php skriver ut vid sidladdning. Smakorden
        är adjektiv (krämig, tvär, sammetslen) och bär ingen bestämd form, så
        ordet står för sig självt med versal — glider den här strängen isär från
-       PHP:s byter rubriken tyst utseende när JS tar över. */
+       PHP:s, byter rubriken tyst utseende när JS tar över. */
     var antalsord = traffar === 1 ? 'en smoothie' : traffar + ' smoothies';
     var text = smak === ''
       ? 'Alla smoothies · Nyast först'

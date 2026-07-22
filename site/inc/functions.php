@@ -203,6 +203,22 @@ function bas(string $vag): string
     return BASVAG . $vag;
 }
 
+/**
+ * Länk till en egen fil under assets/, med filens ändringstid som version.
+ *
+ * .htaccess låter webbläsaren spara CSS och JS en månad utan att fråga om
+ * lov. Utan det här hade en ändrad stilmall inte nått en återvändande
+ * besökare förrän cachen gick ut. Ändringstiden i frågesträngen gör adressen
+ * ny så fort filen ändras — och oförändrad så länge den inte gör det, så att
+ * cachen fortsätter göra nytta.
+ */
+function tillgang_url(string $relativ): string
+{
+    $disk = __DIR__ . '/..' . $relativ;
+    $version = is_file($disk) ? filemtime($disk) : false;
+    return bas($relativ) . ($version !== false ? '?v=' . $version : '');
+}
+
 function url_for(string $id): string
 {
     return BASVAG . '/smoothie/' . rawurlencode(trim($id));
