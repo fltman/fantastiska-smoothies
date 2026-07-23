@@ -1,12 +1,618 @@
 {
   "version": 1,
-  "uppdaterad": "2026-07-22T21:59:20+02:00",
+  "uppdaterad": "2026-07-23T11:41:35+02:00",
   "smoothies": [
     {
-      "id": "idas-mangovaniljdrom",
-      "namn": "Idas mangovaniljdröm",
+      "id": "solveigs-smultronsol",
+      "namn": "Solveigs smultronsol",
+      "underrubrik": "Smultron och citron möts i en rosa, krämig sommarsmoothie",
+      "beskrivning": "Solveigs smultronsol smakar som en solig eftermiddag vid bärlandet, där syrliga citrusfrukter möter mogna smultron. En strimma grön mynta virvlar in som en lemoncurd-doft, mjuk men aldrig sockrig, och färgen påminner om rosa moln vid solnedgång.",
+      "smakprofil": [
+        "smultron",
+        "citrus",
+        "krämig",
+        "syrlig"
+      ],
+      "farger": {
+        "start": "#ff6f91",
+        "slut": "#7ed957"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "frysta smultron",
+          "not": "eller jordgubbar"
+        },
+        {
+          "mangd": "1/2",
+          "vara": "banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grekisk yoghurt",
+          "not": null
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1",
+          "vara": "citron, skal och saft",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mascarpone",
+          "not": null
+        },
+        {
+          "mangd": "5",
+          "vara": "färska myntablad",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa smultron, banan, yoghurt, honung och mascarpone till en jämn, rosa bas.",
+        "Blanda citronsaft, citronskal och myntablad separat till en tunn grön svirl.",
+        "Häll den rosa basen i ett glas och ringla den gröna svirlen ovanpå med en sked.",
+        "Dra en tandpetare genom svirlen för ett marmorerat mönster innan servering."
+      ],
+      "toppa_med": [
+        "färska myntablad",
+        "citronzest",
+        "en halv smultron på kanten"
+      ],
+      "knep": "Låt den gröna svirlen vila kall en stund innan du ringlar den, så håller mönstret sig längre i glaset.",
+      "portioner": 1,
+      "tid_minuter": 6,
+      "bild_alt": "Ett högt glas med rosa smoothie där en grön svirl slingrar sig genom, toppat med myntablad och en smultronbit på kanten.",
+      "bildprompt": "A tall glass filled with a soft pink strawberry smoothie, a vivid green swirl of mint and citrus curling through the surface like marbled silk, topped with fresh mint leaves and a halved strawberry on the rim, set against a warm coral-pink backdrop. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/solveigs-smultronsol.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Solveig",
+      "onskemal": "Jag är sugen på något som smakar smultron och fräsch citron."
+    },
+    {
+      "id": "sus-gyllene-melonmorgon",
+      "namn": "Sus gyllene melonmorgon",
+      "underrubrik": "Solig melondoft med ett stänk honung och svalkande yoghurt",
+      "beskrivning": "En påse av sommarens första ljusa timmar, då melonen låg kall på frukostbordet och doftade av lov. Sus dröm om de gamla melonfrukostarna får liv i en skål full av gyllene fruktkött och krämig svalka.",
+      "smakprofil": [
+        "fruktig",
+        "svalkande",
+        "honungslen"
+      ],
+      "farger": {
+        "start": "#F4E27A",
+        "slut": "#F3A23A"
+      },
+      "emoji": "🍈",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "cantaloupemelon i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vattenmelon i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "honungsmelon i bitar",
+          "not": null
+        },
+        {
+          "mangd": "1/2",
+          "vara": "banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grekisk yoghurt",
+          "not": null
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1/2 dl",
+          "vara": "kokosmjölk",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "4-5",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Skär melonerna i bitar och lägg dem i mixern tillsammans med banan.",
+        "Häll på yoghurt, honung och kokosmjölk.",
+        "Mixa på hög hastighet tills blandningen är slät och luftig.",
+        "Tillsätt isbitar och mixa en sista gång till önskad konsistens."
+      ],
+      "toppa_med": [
+        "ett stänk honung",
+        "färska myntablad"
+      ],
+      "knep": "Välj en melon som doftar sött vid stjälken, då blir smaken som djupast.",
+      "portioner": 1,
+      "tid_minuter": 6,
+      "bild_alt": "Ett högt glas fyllt med gyllengul melonsmoothie, toppad med myntablad, mot en solgul bakgrund.",
+      "bildprompt": "A tall glass filled with a pale golden melon smoothie, glossy surface flecked with tiny honey swirls, topped with a few fresh mint leaves. Soft honeydew and cantaloupe pieces rest around the glass base against a warm sunlit yellow backdrop. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/sus-gyllene-melonmorgon.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Sus",
+      "onskemal": "Jag är sugen på något som smakar fruktigt och svalt."
+    },
+    {
+      "id": "mallorcas-gyllene-eftermiddag",
+      "namn": "Mallorcas gyllene eftermiddag",
+      "underrubrik": "citrus, mango och en vindpust av mynta och rosmarin",
+      "beskrivning": "Solen står högt över stenlagda gränder och citrusdoften blandas med havssalt. Mango och apelsin möter ett stänk mynta och en discret kvist rosmarin, som en balkongdrink vid skymning. Kall, syrlig och fylld av sommarens glädje.",
+      "smakprofil": [
+        "citrus",
+        "tropisk",
+        "kryddig",
+        "frisk"
+      ],
+      "farger": {
+        "start": "#FFB74D",
+        "slut": "#7CB342"
+      },
+      "emoji": "🍋",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "fryst mango",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "färskpressad apelsinjuice",
+          "not": null
+        },
+        {
+          "mangd": "1/2",
+          "vara": "lime, saften",
+          "not": null
+        },
+        {
+          "mangd": "4 blad",
+          "vara": "färsk mynta",
+          "not": null
+        },
+        {
+          "mangd": "1 kvist",
+          "vara": "färsk rosmarin",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1/2",
+          "vara": "fryst banan",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa mango, apelsinjuice, limesaft, mynta och rosmarin tills allt är finfördelat.",
+        "Tillsätt kokosmjölk, honung och banan, mixa igen till en sammetslen konsistens.",
+        "Smaka av och justera med mer lime om du vill ha extra syra.",
+        "Häll upp i högt glas och servera genast."
+      ],
+      "toppa_med": [
+        "myntablad",
+        "en kvist rosmarin",
+        "en curl av limeskal"
+      ],
+      "knep": "Slå in en kvist rosmarin runt kanten av glaset för en extra doft vid varje klunk.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas med gulorange mango-citrussmoothie garnerad med myntablad och en kvist rosmarin, mot grön bakgrund.",
+      "bildprompt": "A vibrant orange-yellow smoothie fills a tall clear glass, its glossy surface flecked with tiny mint specks and topped with a fresh rosemary sprig and a curl of lime peel. The backdrop is a warm saturated orange-yellow, echoing the citrus tones of the drink. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/mallorcas-gyllene-eftermiddag.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": null,
+      "onskemal": "Citrus, mango fräscht men med lite kryddiga fruktiga toner av mynta och överraskande rosmarin kanske."
+    },
+    {
+      "id": "jonas-angssommar",
+      "namn": "Jonas ängssommar",
+      "underrubrik": "Blåbär och hallon i skimrande sommarkyss",
+      "beskrivning": "Jonas smoothie doftar som en äng i juli, där blåbärsbuskarna möter hallonrader i solvarmt gräs. Den är sammetslen och fylld av bärens syra, med en mjuk kudde av vaniljsöt kräm som smälter på tungan. En påminnelse om att sommaren är kort och ska smaka precis så här.",
+      "smakprofil": [
+        "bärig",
+        "syrlig",
+        "sommarvarm",
+        "krämig"
+      ],
+      "farger": {
+        "start": "#F6D55C",
+        "slut": "#4B3F72"
+      },
+      "emoji": "🫐",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "blåbär",
+          "not": "färska eller frysta"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "hallon",
+          "not": "färska eller frysta"
+        },
+        {
+          "mangd": "1",
+          "vara": "banan",
+          "not": "mogen"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "mascarpone",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vispgrädde",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "havregryn",
+          "not": null
+        },
+        {
+          "mangd": "2 dl",
+          "vara": "mjölk",
+          "not": "eller växtmjölk"
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg blåbär, hallon och banan i mixern.",
+        "Tillsätt mascarpone, vispgrädde och honung.",
+        "Häll på havregryn och mjölk och mixa till en sammetslen konsistens.",
+        "Smaka av och mixa igen om du vill ha den ännu jämnare."
+      ],
+      "toppa_med": [
+        "extra blåbär och hallon",
+        "en kvist mynta",
+        "ett strö av havregryn"
+      ],
+      "knep": "Frys bären några timmar innan du mixar, då blir smoothien tjockare utan att smaken vattnas ur.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "En hög smoothie i djupt blått med lila skiftning, toppad med hela blåbär och hallon, i ett glas mot gul bakgrund.",
+      "bildprompt": "A tall glass filled with a deep blue-purple smoothie flecked with crushed raspberries, its surface glossy and thick, topped with a scatter of whole blueberries, raspberries and a sprig of mint. The backdrop is a warm sunny yellow that echoes summer light. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/jonas-angssommar.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Jonas",
+      "onskemal": "Jag är sugen på något som smakar riktigt mycket sommar."
+    },
+    {
+      "id": "claes-soliga-barmorgon",
+      "namn": "Claes soliga bärmorgon",
+      "underrubrik": "Hallon, jordgubbe och en skvätt apelsin i en gyllene sommarmorgon",
+      "beskrivning": "Claes bad om svensk sommar och fick den, i en skål av rosa och guld som smakar av dagg på gräset och nyplockade bär. Den är len som ett morgonljus genom lövverket, med en syrlig lyster av apelsin som väcker sinnena innan dagen riktigt börjat.",
+      "smakprofil": [
+        "fruktig",
+        "krämig",
+        "syrlig",
+        "ljus"
+      ],
+      "farger": {
+        "start": "#F9E076",
+        "slut": "#FF6F61"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "fryst hallon",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "fryst jordgubbe",
+          "not": null
+        },
+        {
+          "mangd": "1",
+          "vara": "mogen banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grekisk yoghurt",
+          "not": "eller kvarg"
+        },
+        {
+          "mangd": "2 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1/2 dl",
+          "vara": "havregryn",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "apelsinjuice",
+          "not": "nypressad om möjligt"
+        },
+        {
+          "mangd": "1 skvätt",
+          "vara": "vaniljextrakt",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg alla ingredienser i mixern i den ordning de listas.",
+        "Mixa på hög hastighet tills smoothien är sammetslen och jämn.",
+        "Häll upp i ett högt glas och servera direkt."
+      ],
+      "toppa_med": [
+        "färska hallon",
+        "strimlad mynta"
+      ],
+      "knep": "Frys bären natten innan så blir konsistensen extra len utan att smoothien blir vattnig.",
+      "portioner": 2,
+      "tid_minuter": 5,
+      "bild_alt": "Ett högt glas fylld med en rosa-gyllen smoothie, toppad med färska hallon och mynta, mot en varm gul bakgrund.",
+      "bildprompt": "A tall glass filled with a glowing pink-gold smoothie, thick and glossy, topped with fresh raspberries and a sprig of mint. Warm golden-yellow backdrop that echoes an early summer morning. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/claes-soliga-barmorgon.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Claes",
+      "onskemal": "Jag är sugen på något som smaka som svensk sommar., gärna frukt och bär."
+    },
+    {
+      "id": "asas-tropiska-mojito",
+      "namn": "Åsas tropiska mojito",
+      "underrubrik": "Lime, mynta och kokos i ett svalt karibiskt möte",
+      "beskrivning": "Åsas dröm om varma nätter och saltstänkt luft får liv i detta glas, där mynta och lime möter en smekande kokosbotten. Det doftar som en strandbar vid solnedgången, sött och friskt på samma gång.",
+      "smakprofil": [
+        "citrusig",
+        "mynta",
+        "kokosaktig",
+        "frisk"
+      ],
+      "farger": {
+        "start": "#7ED957",
+        "slut": "#1C7C74"
+      },
+      "emoji": "🍃",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "kokosmjölk",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1 skopa",
+          "vara": "vaniljglass",
+          "not": "eller kokosglass"
+        },
+        {
+          "mangd": "1",
+          "vara": "fryst banan",
+          "not": null
+        },
+        {
+          "mangd": "1 handfull",
+          "vara": "färska myntablad",
+          "not": null
+        },
+        {
+          "mangd": "1",
+          "vara": "pressad lime",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Mixa kokosmjölk, honung och glass tills blandningen blir silkeslent.",
+        "Tillsätt banan, myntablad och limejuice och mixa igen.",
+        "Häll i isbitarna och mixa till en frostig, len konsistens."
+      ],
+      "toppa_med": [
+        "extra myntablad",
+        "limeskal",
+        "ett stänk flingsalt"
+      ],
+      "knep": "Pressa limen precis innan servering så bevaras dess friska doft bäst.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "En hög limegrön smoothie i ett klart glas, garnerad med myntablad och en skiva lime mot en solig bakgrund.",
+      "bildprompt": "A vivid lime-green smoothie filling a tall clear glass, glossy and thick, topped with fresh mint leaves and a thin lime slice, with droplets of condensation catching the light. The backdrop is a warm sunny green that echoes the drink's fresh hue. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/asas-tropiska-mojito.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Åsa",
+      "onskemal": "Jag är sugen på något som smakar..."
+    },
+    {
+      "id": "anders-smultronsommar",
+      "namn": "Anders smultronsommar",
+      "underrubrik": "Söta smultron, mörka blåbär och en doft av sommarbrygga",
+      "beskrivning": "Anders smoothie doftar av sommarlov, av smultronplockning i backen och av heta bryggplankor under bara fötter. Sötman kommer från de små röda bären, medan blåbären lägger en mörkare, lite hemlighetsfull ton under. Det är en påminnelse om lata eftermiddagar vid vattnet, när tiden inte betydde något.",
+      "smakprofil": [
+        "söt",
+        "bärig",
+        "sommarig",
+        "krämig"
+      ],
+      "farger": {
+        "start": "#E8536B",
+        "slut": "#4A6FA5"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "smultron eller jordgubbar",
+          "not": "fryst"
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "blåbär",
+          "not": "fryst"
+        },
+        {
+          "mangd": "1/2",
+          "vara": "banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grädde",
+          "not": "vispgrädde"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "havregryn",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "vatten eller mjölk",
+          "not": "efter behov"
+        }
+      ],
+      "gor_sa_har": [
+        "Blanda smultron, blåbär och banan i mixern.",
+        "Tillsätt grädde, honung och havregryn.",
+        "Mixa till en sammetslen konsistens och späd med vatten eller mjölk efter behag."
+      ],
+      "toppa_med": [
+        "färska blåbär",
+        "ett smultron",
+        "smulad mandelbiskvi"
+      ],
+      "knep": "Låt smultronen ligga i rumstemperatur en stund innan mixning, då blir sötman djupare.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "En rosaröd smoothie med blåa strimmor i ett högt glas, omgiven av smultron och blåbär mot en varm rosa bakgrund.",
+      "bildprompt": "A vibrant pink-red smoothie swirled with deep blue streaks, topped with fresh wild strawberries and blueberries, set against a warm coral-pink background reminiscent of a summer garden. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/anders-smultronsommar.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Anders",
+      "onskemal": "Jag är sugen på något som smakar som ett sommarlov när man var liten,"
+    },
+    {
+      "id": "fredriks-olandska-sommar",
+      "namn": "Fredriks öländska sommar",
+      "underrubrik": "Hallon och lakrits möts i en salt, solvarm vind",
+      "beskrivning": "Här möts syrliga hallon och mörk lakrits som på en stenig strand där vinden aldrig riktigt lägger sig. Fredrik bad om sol och salt, och den här är svaret: krämig, rosaröd och med ett stänk av hav i botten. Drick den med bara fötter i sanden, om du kan.",
+      "smakprofil": [
+        "hallon",
+        "lakrits",
+        "salt",
+        "syrlig"
+      ],
+      "farger": {
+        "start": "#E63950",
+        "slut": "#2B2320"
+      },
+      "emoji": "🍓",
+      "ingredienser": [
+        {
+          "mangd": "2 dl",
+          "vara": "frysta hallon",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "kokosmjölk",
+          "not": "eller kokosgrädde"
+        },
+        {
+          "mangd": "1 msk",
+          "vara": "honung",
+          "not": "eller lönnsirap"
+        },
+        {
+          "mangd": "1 tsk",
+          "vara": "lakritspulver",
+          "not": "eller finhackad lakritsrulle"
+        },
+        {
+          "mangd": "1/2",
+          "vara": "banan",
+          "not": null
+        },
+        {
+          "mangd": "1 dl",
+          "vara": "grekisk yoghurt",
+          "not": null
+        },
+        {
+          "mangd": "3-4",
+          "vara": "isbitar",
+          "not": null
+        }
+      ],
+      "gor_sa_har": [
+        "Lägg hallon, kokosmjölk, honung och lakritspulver i mixern.",
+        "Tillsätt banan, yoghurt och isbitar.",
+        "Mixa på hög hastighet tills smoothien är slät och djupt rosa.",
+        "Häll upp direkt medan den fortfarande är kall från isen."
+      ],
+      "toppa_med": [
+        "krossade hallon",
+        "en nypa lakritssalt",
+        "kokosflarn"
+      ],
+      "knep": "Rulla lakritsen mellan fingrarna innan du mäter upp den, så vaknar doften ordentligt.",
+      "portioner": 1,
+      "tid_minuter": 5,
+      "bild_alt": "En rosaröd smoothie i högt glas, toppad med krossade hallon och en nypa mörkt lakritssalt, mot en varm terrakottafärgad bakgrund.",
+      "bildprompt": "A vivid raspberry-pink smoothie in a tall clear glass, thick and glossy, topped with crushed raspberries and a dark speckle of licorice salt, a few whole raspberries and a small piece of dark licorice resting at the base. Warm terracotta-red colour-block backdrop. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
+      "bild": "assets/bilder/fredriks-olandska-sommar.webp",
+      "publicerad": "2026-07-23",
+      "onskad_av": "Fredrik",
+      "onskemal": "Jag är sugen på något som smakar hallon och lakrits."
+    },
+    {
+      "id": "eftermiddag-vid-fruktstandet",
+      "namn": "Eftermiddag vid fruktståndet",
       "underrubrik": "Solmogen mango möter len vanilj i en sammetslen smekning",
-      "beskrivning": "Idas smoothie doftar som en het eftermiddag vid fruktstånd, där mango och vanilj smälter samman i en och samma klunk. Färgen är varm som solnedgång, konsistensen len som nyskopad glass på tunga.",
+      "beskrivning": "Den doftar av solmogen mango och vanilj som smälter samman i en och samma klunk. Färgen är varm som en solnedgång, konsistensen len som nyskopad glass på tungan.",
       "smakprofil": [
         "tropisk",
         "krämig",
@@ -66,9 +672,9 @@
       "tid_minuter": 5,
       "bild_alt": "Ett högt glas fyllt med gyllene mango-vaniljsmoothie, toppad med mangotärningar och kokosflarn mot en varm orange bakgrund.",
       "bildprompt": "A tall glass filled with a glowing golden-orange mango and vanilla smoothie, thick and glossy, topped with diced mango cubes, coconut flakes and a whole vanilla bean laid across the rim. Warm saturated orange backdrop that echoes the drink's sunset hue. Editorial food photography, a single tall clear glass filled to the brim, shot straight on at glass height, shallow depth of field. Soft bright daylight from the left, gentle shadows. A few of the actual ingredients arranged loosely around the base of the glass. Solid saturated colour-block backdrop that echoes the drink. Playful, joyful, appetising, glossy and thick in texture. No text, no logos, no people, no hands, no measuring tools, no nutrition labels. Square composition, 1:1.",
-      "bild": "assets/bilder/idas-mangovaniljdrom.webp",
+      "bild": "assets/bilder/eftermiddag-vid-fruktstandet.webp",
       "publicerad": "2026-07-22",
-      "onskad_av": "Ida",
+      "onskad_av": null,
       "onskemal": "En dröm av vaniljglass och mango"
     },
     {

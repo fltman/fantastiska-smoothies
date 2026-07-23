@@ -542,11 +542,10 @@ KODMONSTER = [
 #    Listan läses som ordstammar, precis som AMNESORD: "vodka" ska fastna även
 #    i "vodkadrink" och "nazi" i "nazistiska". En snäv förbudslista bredvid en
 #    generös tillåtlista vore precis fel väg.
+# Alkohol hanteras för sig (se ALKOHOL nedan): en gäst som ber om en
+# alkoholfri version av en drink — "som en White Russian men utan sprit" — är
+# själva målgruppen, och ska inte avvisas för att ordet "sprit" står i brevet.
 OLAMPLIGT = _ordstam(
-    # sprit
-    "vodka", "brännvin", "snaps", "whisky", "whiskey", "tequila", "likör",
-    "vermouth", "aperol", "amaretto", "rödvin", "vitvin", "glögg", "champagne",
-    "cider", "alkoholdryck", "alkoholhaltig",
     # droger
     "kokain", "amfetamin", "cannabis", "thc", "knark", "narkotika", "droger",
     "ecstasy", "lsd", "opium", "heroin",
@@ -560,11 +559,9 @@ OLAMPLIGT = _ordstam(
     "misshandel", "misshandla", "idiot", "hora", "kärring",
 ) + _helord(
     # De här står kvar som hela ord: som ordstam skulle de dra med sig helt
-    # oskyldiga ord. rom/romantisk, vin/vinbär, gift/gifta sig, blod/
-    # blodapelsin, gin/Gina, sprit/spritsad, kiss/kisse, snor/snorkel,
-    # öl/Öland, bourbon/bourbonvanilj, punsch/punschrulle, spott/spottsten.
-    "rom", "vin", "gift", "blod", "gin", "sprit", "kiss", "snor", "öl",
-    "spott", "alkohol", "bourbon", "punsch",
+    # oskyldiga ord. gift/gifta sig, blod/blodapelsin, kiss/kisse,
+    # snor/snorkel, spott/spottsten.
+    "gift", "blod", "kiss", "snor", "spott",
     # flerordsfraser
     "skada någon", "ta livet av", "slå ihjäl", "slår ihjäl",
 ) + _ordstam(
@@ -585,6 +582,49 @@ OLAMPLIGT = _ordstam(
     "dick", "cock", "pussy", "boobs", "tits", "cum", "fuck", "fucking",
     "shit", "bitch", "asshole", "wank", "horunge",
 )
+
+# Alkohol, hanterad skilt från OLAMPLIGT. Sajten gör inga drinkar med sprit,
+# men gästen som ber om en alkoholfri version av en drink hen tycker om är
+# målgruppen, inte en avvisning. Ett brev fälls därför bara om det verkar
+# vilja ha alkoholen — inte om det uttryckligen väljer bort den.
+ALKOHOL = _ordstam(
+    "vodka", "brännvin", "snaps", "whisky", "whiskey", "tequila", "likör",
+    "vermouth", "aperol", "amaretto", "rödvin", "vitvin", "glögg", "champagne",
+    "cider", "alkoholdryck", "alkoholhaltig",
+) + _helord(
+    "rom", "vin", "gin", "sprit", "öl", "alkohol", "bourbon", "punsch",
+)
+
+# Ord som gör klart att alkoholen väljs bort. Står något av dem strax före
+# alkoholordet, eller någonstans i brevet som ett tydligt «alkoholfritt», är
+# drinkreferensen ett smakminne och inget beställning av sprit.
+_NEKANDE_STRAX_FORE = re.compile(
+    r"\b(utan|ingen|inget|inga|noll|fri(?:tt)? från|slippa|nej till|minus)\s+$",
+    re.I,
+)
+_ALKOHOLFRITT = re.compile(
+    r"\b(alkoholfri\w*|nykter\w*|mocktail\w*|virgin|"
+    r"utan\s+alkohol|utan\s+sprit|0\s*%|noll\s*procent)\b",
+    re.I,
+)
+
+
+def _vill_ha_alkohol(text: str) -> str | None:
+    """Ett alkoholord som brevet verkar VILJA ha, annars None.
+
+    Väljer brevet bort alkoholen — «utan sprit», «alkoholfri», «som en mojito
+    men nykter» — returneras None: det är målgruppen, inte en avvisning.
+    """
+    if _ALKOHOLFRITT.search(text):
+        return None
+    for monster, ord_ in ALKOHOL:
+        for traff in monster.finditer(text):
+            # Nekas ordet strax före? Då är det bortvalt, inte önskat.
+            if _NEKANDE_STRAX_FORE.search(text[:traff.start()]):
+                continue
+            return ord_
+    return None
+
 
 # d) Den hårda regeln i CONTRACT §2. Handlar brevet om kroppen, vikten eller
 #    hälsan får det inte gå vidare in i prompten — vi svarar hellre vänligt att
@@ -737,6 +777,13 @@ def ar_rimligt_onskemal(text: str) -> tuple[bool, str]:
     traff = _forsta_traff(text, OLAMPLIGT)
     if traff:
         return False, f"innehåller något vi inte gör smoothies av ({traff!r})"
+
+    # Alkohol för sig: bara om brevet verkar vilja ha den. «Utan sprit» och
+    # «alkoholfri» passerar — det är gästen som ber om en nykter version, och
+    # hen ska ha sin smoothie, inte ett avvisningsbrev.
+    traff = _vill_ha_alkohol(text)
+    if traff:
+        return False, f"handlar om alkohol ({traff!r})"
 
     lag = text.lower()
     if any(ord_ in lag for ord_ in KROPPSORD):
